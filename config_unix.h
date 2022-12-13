@@ -53,6 +53,9 @@
 #include <errno.h>
 #include <math.h>
 #include <stdlib.h>
+
+/* feature macro for strcasestr in string.h: */
+#define _GNU_SOURCE
 #include <string.h>
 
 #ifdef HAVE_MALLOC_H
@@ -61,10 +64,6 @@
 
 #ifdef HAVE_BSTRING_H
 #include <bstring.h>
-#endif
-
-#ifdef HAVE_STROPTS_H
-#include <stropts.h>
 #endif
 
 #ifdef HAVE_SYS_FILIO_H

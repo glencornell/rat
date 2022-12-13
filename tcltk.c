@@ -244,7 +244,7 @@ static int
 mbus_send_cmd(ClientData ttp, Tcl_Interp *i, int argc, char *argv[])
 {
 	if (argc != 4) {
-		i->result = "mbus_send <reliable> <cmnd> <args>";
+          Tcl_SetResult(i, "mbus_send <reliable> <cmnd> <args>", TCL_STATIC);
 		return TCL_ERROR;
 	}
 	mbus_qmsg((struct mbus *)ttp, engine_addr, argv[2], argv[3], strcmp(argv[1], "R") == 0);
@@ -256,7 +256,7 @@ mbus_encode_cmd(ClientData ttp, Tcl_Interp *i, int argc, char *argv[])
 {
 	UNUSED(ttp);
 	if (argc != 2) {
-		i->result = "mbus_encode_str <str>";
+          Tcl_SetResult(i, "mbus_encode_str <str>", TCL_STATIC);
 		return TCL_ERROR;
 	}
         Tcl_SetResult(i, mbus_encode_str(argv[1]), (Tcl_FreeProc *) xfree);

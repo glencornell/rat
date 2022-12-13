@@ -79,7 +79,7 @@ render_3D_filter_get_name(int id)
 }
 
 int
-render_3D_filter_get_by_name(char *name)
+render_3D_filter_get_by_name(const char *name)
 {
         int i;
         for(i = 0; i < (signed)NUM_FILTERS; i++) {
@@ -162,7 +162,7 @@ render_3D_init(int sampling_rate)
 {
         int               azimuth, length;
         int               default_filter_num;
-        char              *default_filter_name;
+        const char        *default_filter_name;
         render_3D_dbentry *render_3D_data;
 
         azimuth = render_3D_idx2azimuth(n_users_created);

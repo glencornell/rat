@@ -590,7 +590,6 @@ static void rx_tool_rat_logstats(char *srce, char *args, session_t *sp)
 			char             fname[100];
 			char		 hname[64];
 			char		*uname;
-			const char	*cname;
 #ifndef WIN32
 			struct passwd  *pwent;
 
@@ -614,7 +613,6 @@ static void rx_tool_rat_logstats(char *srce, char *args, session_t *sp)
 #else
 			sprintf(fname, "rat-%p-%jd.%06ld-%s-%s.log", sp, (intmax_t)t.tv_sec, (long)t.tv_usec, hname, uname); //SV-XXX: FreeBSD
 #endif
-			cname = rtp_get_sdes(sp->rtp_session[0], rtp_my_ssrc(sp->rtp_session[0]), RTCP_SDES_CNAME);
 
 			sp->logger = fopen(fname, "w");
 #ifdef WIN32
@@ -1445,7 +1443,7 @@ set_red_parameters(session_t *sp, char *sec_enc, int offset)
 static void
 set_layered_parameters(session_t *sp, char *sec_enc, char *schan, char *sfreq, int layerenc)
 {
-	const codec_format_t *pcf, *lcf;
+	const codec_format_t *lcf;
 	codec_id_t            pri_id, lay_id;
 	char *cmd;
 	int      freq, channels;
@@ -1462,7 +1460,6 @@ set_layered_parameters(session_t *sp, char *sec_enc, char *schan, char *sfreq, i
 
 	freq = string_to_freq(sfreq);
 	pri_id = codec_get_by_payload(sp->encodings[0]);
-	pcf    = codec_get_format(pri_id);
 	lay_id = codec_get_matching(sec_enc, (uint16_t)freq, (uint16_t)channels);
 	if(lay_id == 0) {
 		debug_msg("Can't find layered codec (%s) - need to change primary codec\n", sec_enc);

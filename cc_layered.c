@@ -588,7 +588,7 @@ layered_decoder_peek(uint8_t   pkt_pt,
         u_char               *p, *data;
         uint32_t hdr32;
         uint8_t hdrpt;
-        uint16_t blen, mrk;
+        uint16_t blen;
         assert(buf != NULL);
         assert(upp != NULL);
         assert(pt  != NULL);
@@ -600,7 +600,6 @@ layered_decoder_peek(uint8_t   pkt_pt,
 
         if(hdr32 & LAY_HDR32_PAT) {
                 hdrpt = (uint8_t)(LAY_HDR32_GET_PT(hdr32));
-                mrk = (uint16_t)(LAY_HDR32_GET_MRK(hdr32));
                 blen = (uint16_t)(LAY_HDR32_GET_LEN(hdr32));
                 p+=4;
                 data += 4 + blen;
@@ -676,9 +675,8 @@ layered_decoder_describe (uint8_t   pkt_pt,
                           char    *out,
                           uint32_t  out_len)
 {
-        uint32_t hdr32, slen;
+        uint32_t hdr32;
         uint8_t hdrpt;
-		uint16_t blen, mrk;
 		codec_id_t            pri_id;
         const codec_format_t *pri_cf;
 
@@ -687,13 +685,10 @@ layered_decoder_describe (uint8_t   pkt_pt,
         hdr32 = ntohl(*(uint32_t*)data);
         if(hdr32 & LAY_HDR32_PAT) {
                 hdrpt = (uint8_t)(LAY_HDR32_GET_PT(hdr32));
-                mrk = (uint16_t)(LAY_HDR32_GET_MRK(hdr32));
-                blen = (uint16_t)(LAY_HDR32_GET_LEN(hdr32));
 
                 pri_id = codec_get_by_payload(hdrpt);
                 if(pri_id) {
                         pri_cf = codec_get_format(pri_id);
-                        slen = strlen(pri_cf->long_name);
                         strncpy(out, pri_cf->long_name, out_len);
                         goto done;
                 }

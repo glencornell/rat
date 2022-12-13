@@ -48,27 +48,6 @@ int	    continuing_from_stop=0;
 
 static int ttl = 127;
 
-#ifdef NEED_SNPRINTF
-static int snprintf(char *s, int buf_size, const char *format, ...)
-{
-        /* Quick hack replacement for snprintf... note that this */
-        /* doesn't check for buffer overflows, and so is open to */
-        /* many really nasty attacks!                            */
-        va_list	ap;
-        int	rc;
-
-        UNUSED(buf_size);
-        va_start(ap, format);
-#ifdef WIN32
-        rc = _vsnprintf(s, buf_size, format, ap);
-#else
-        rc = vsprintf(s, format, ap);
-#endif
-        va_end(ap);
-        return rc;
-}
-#endif
-
 static int
 address_is_valid(const char *candidate)
 {

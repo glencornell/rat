@@ -161,7 +161,7 @@ voxlet_destroy(voxlet_t **ppv)
 int
 voxlet_play(voxlet_t *pv, timestamp_t start, timestamp_t end)
 {
-        timestamp_t          duration, safety;
+        timestamp_t          duration;
         uint32_t      samples;
         coded_unit    src, dst;
         sndfile_fmt_t sfmt;
@@ -196,7 +196,6 @@ voxlet_play(voxlet_t *pv, timestamp_t start, timestamp_t end)
         duration = ts_convert(sfmt.sample_rate, duration);
         duration.ticks = duration.ticks + (320 - duration.ticks % 320);
         samples  = duration.ticks * sfmt.channels;
-        safety = ts_map32(8000, 320);
 
         /* Initialize src for reading chunk of sound file */
         src.id        = codec_get_native_coding((uint32_t)sfmt.sample_rate, (uint16_t)sfmt.channels);

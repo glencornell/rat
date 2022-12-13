@@ -1,4 +1,0 @@
-#!/bin/sh
-# Generated automatically from RAT Makefile.  Edit there.
-PATH=${PATH}:.
-exec rat-4.4.01 "$@"

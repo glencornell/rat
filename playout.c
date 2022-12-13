@@ -494,7 +494,7 @@ pb_iterator_audit(pb_iterator_t *pi, timestamp_t history_len)
 {
         timestamp_t cutoff;
         int  removed;
-        pb_node_t *stop, *curr, *next;
+        pb_node_t *curr, *next;
         pb_t      *pb;
 
 #ifdef DEBUG
@@ -509,7 +509,6 @@ pb_iterator_audit(pb_iterator_t *pi, timestamp_t history_len)
 	pb_validate(pi->buffer);
 
         pb   = pi->buffer;
-        stop = pi->node;
         removed = 0;
         if (pi->node != pb->psentinel) {
                 curr = pb->psentinel->next; /* head */;

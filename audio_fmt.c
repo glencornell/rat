@@ -409,10 +409,8 @@ audio_format_buffer_convert(audio_format *src,
                             int dst_bytes)
 {
         int out_bytes;
-        u_char *se;
 
         out_bytes = src_bytes * dst->bits_per_sample * dst->channels / (src->bits_per_sample * src->channels);
-        se        = src_buf + src_bytes;
 
         assert(out_bytes <= dst_bytes);
         xmemchk();

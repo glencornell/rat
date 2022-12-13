@@ -10,6 +10,7 @@
  * All rights reserved.
  */
 
+#ifndef HAVE_USLEEP
 #ifndef HIDE_SOURCE_STRINGS
 static const char cvsid[] =
 	"$Id: usleep.c 3642 2004-01-12 17:14:56Z ucacoxh $";
@@ -27,11 +28,9 @@ int usleep(unsigned int usec)
 	}
         return 0;
 }
-#endif
-
+#else
 /* On Irix 6.5.4m this function isn't needed.... we should probably have */
 /* a check in the configure script for usleep().                         */
-#ifdef NEED_USLEEP
 int usleep(unsigned int usec)
 {
 	struct timespec sleeptime,t2;
@@ -44,5 +43,6 @@ int usleep(unsigned int usec)
 		sleeptime.tv_nsec = t2.tv_nsec;
 	}
 }
-#endif
+#endif /* WIN32 */
 
+#endif /* !HAVE_USLEEP */

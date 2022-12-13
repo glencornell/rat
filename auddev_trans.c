@@ -50,7 +50,7 @@ static bufdevInfo bufdev[MAXBUFDEVS];
 static uint32_t devIdMap[MAXBUFDEVS];
 
 
-static char *bufdevName[2] = {"Transcoder Port 1", "Transcoder Port 2"};
+static const char *bufdevName[2] = {"Transcoder Port 1", "Transcoder Port 2"};
 
 #define CHANNEL_SIZE    8192
 

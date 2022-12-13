@@ -84,7 +84,6 @@ void
 session_init(session_t *sp, int index, int mode)
 {
 	codec_id_t                 cid;
-        const codec_format_t      *cf   = NULL;
         const converter_details_t *conv = NULL;
         const cc_details_t        *ccd  = NULL;
         uint8_t                    i;
@@ -97,7 +96,6 @@ session_init(session_t *sp, int index, int mode)
 
 	cid = codec_get_by_name("DVI-8K-Mono");
         assert(cid);
-        cf  = codec_get_format(cid);
 	sp->cur_ts                      = ts_map32(8000,0);
         sp->encodings[0]		= codec_get_payload(cid);           	/* user chosen encoding for primary */
 	sp->num_encodings		= 1;                                	/* Number of encodings applied */

@@ -16,7 +16,7 @@ struct s_render_3D_dbentry;
 
 int   render_3D_filter_get_count(void);
 char *render_3D_filter_get_name(int id);
-int   render_3D_filter_get_by_name(char *name);
+int   render_3D_filter_get_by_name(const char *name);
 int   render_3D_filter_get_lengths_count(void);
 int   render_3D_filter_get_length(int idx);
 int   render_3D_filter_get_lower_azimuth(void);

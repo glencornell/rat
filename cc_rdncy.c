@@ -614,7 +614,7 @@ redundancy_decoder_describe (uint8_t   pkt_pt,
 {
         const codec_format_t *cf;
         codec_id_t            cid;
-        uint32_t hdr32, slen, blksz, off, nlen;
+        uint32_t hdr32, slen, nlen;
         u_char  *p, pt;
 
         UNUSED(pkt_pt);
@@ -626,8 +626,6 @@ redundancy_decoder_describe (uint8_t   pkt_pt,
         hdr32 = ntohl(*((uint32_t*)p));
         while (hdr32 & RED_HDR32_PAT) {
                 pt    = (u_char)RED_HDR32_GET_PT(hdr32);
-                off   = RED_HDR32_GET_OFF(hdr32);
-                blksz = RED_HDR32_GET_LEN(hdr32);
                 cid   = codec_get_by_payload(pt);
 
                 if (cid == 0) {

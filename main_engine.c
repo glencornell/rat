@@ -125,7 +125,8 @@ mbus_error_handler(int seqnum, int reason)
         /* Ignore error we're closing down anyway */
 }
 
-int rendezvous_with_controller(session_t *sp[2])
+static int
+rendezvous_with_controller(session_t *sp[2])
 {
 	int		i, j, done, waiting_limitcount=0;
 	struct timeval	timeout;

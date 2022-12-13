@@ -1060,7 +1060,6 @@ recommend_skew_adjust_dur(media_data *md, int drop, timestamp_t *adjust)
         int16_t   matchlen;
         uint32_t  rate;
 	uint16_t  channels, samples;
-        sample   *buffer;
         int16_t   i;
 
         i = md->nrep - 1;
@@ -1072,7 +1071,6 @@ recommend_skew_adjust_dur(media_data *md, int drop, timestamp_t *adjust)
         }
         assert(i != -1);
 
-        buffer  = (sample*)md->rep[i]->data;
         samples = md->rep[i]->data_len / (sizeof(sample) * channels);
         if (drop) {
                 /* match with first samples of frame start just past
@@ -1242,7 +1240,7 @@ source_skew_adapt(source *src, media_data *md, timestamp_t playout)
         uint32_t    i = 0, e = 0, samples = 0;
         uint32_t    rate;
 	uint16_t    channels;
-        timestamp_t adjustment, frame_dur;
+        timestamp_t adjustment;
 
 	source_validate(src);
         assert(src);
@@ -1254,7 +1252,6 @@ source_skew_adapt(source *src, media_data *md, timestamp_t playout)
                         samples = md->rep[i]->data_len / (channels * sizeof(sample));
                         e = audio_avg_energy((sample*)md->rep[i]->data, samples * channels, channels);
                         src->mean_energy = (15 * src->mean_energy + e)/16;
-                        frame_dur = ts_map32(rate, samples);
                         break;
                 }
         }

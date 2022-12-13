@@ -3,6 +3,7 @@
 #include "ts.h"
 #include "playout.h"
 
+#include "audio_types.h"
 #include "codec_types.h"
 #include "codec.h"
 #include "channel_types.h"
@@ -15,7 +16,7 @@ int
 main()
 {
         u_char  *s;
-        u_int32  slen;
+        u_int32_t  slen;
 
         redundancy_encoder_create(&s, &slen);
 

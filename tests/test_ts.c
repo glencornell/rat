@@ -5,23 +5,23 @@
 #define ITERS 100000000
 #define MARK  (ITERS/100)
 
-u_int32 f[] = {8000, 11025, 16000, 22050, 24000, 32000, 40000, 44100, 48000, 90000};
+uint32_t f[] = {8000, 11025, 16000, 22050, 24000, 32000, 40000, 44100, 48000, 90000};
 
-#define NUM_F (sizeof(f)/sizeof(u_int32))
+#define NUM_F (sizeof(f)/sizeof(uint32_t))
 
 static int
 test1()
 {
-        ts_t a, b, c, dac;
+        timestamp_t a, b, c, dac;
         int ib, i, fa, fb;
-        u_int32 ta, tb;
+        uint32_t ta, tb;
 
         for(ib = 0; ib < ITERS; ib += MARK) {
                 for(i = ib; i < ib+MARK; i++) {
                         fa = f[random() % NUM_F];
                         fb = f[random() % NUM_F];
-                        ta = (u_int32)random();
-                        tb = (u_int32)random();
+                        ta = (uint32_t)random();
+                        tb = (uint32_t)random();
 
                         a = ts_map32(fa,ta);
                         b = ts_map32(fb,tb);
@@ -45,8 +45,8 @@ test1()
 static int
 test2()
 {
-        u_int32      t32;
-        ts_t         tsc,tso,step;
+        uint32_t      t32;
+        timestamp_t         tsc,tso,step;
         ts_sequencer s;
 
         int i;

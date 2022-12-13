@@ -7,12 +7,11 @@
 
 #include "memory.h"
 #include "debug.h"
-#include "new_channel.h"
 #include "channel_types.h"
 
 #include "playout.h"
 
-typedef void (*freeproc)(u_char **, u_int32);
+typedef void (*freeproc)(u_char **, uint32_t);
 
 static void
 do_test(codec_state *src_coder,

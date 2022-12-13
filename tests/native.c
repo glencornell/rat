@@ -1,4 +1,5 @@
 #include "config_unix.h"
+#include "audio_types.h"
 #include "codec_types.h"
 #include "codec.h"
 
@@ -8,7 +9,7 @@
 int main()
 {
         codec_id_t cid;
-        u_int16 ic, ir, oc, or;
+        uint16_t ic, ir, oc, or;
         for(ic = 1; ic <= 2; ic++) {
                 for(ir = 8000; ir <= 48000; ir += 8000) {
                         cid = codec_get_native_coding(ir, ic);

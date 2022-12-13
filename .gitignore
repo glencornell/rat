@@ -4,6 +4,7 @@
 *~
 ./Makefile
 .deps/
+.dirstamp
 .libs/
 Makefile
 Makefile.in
@@ -30,4 +31,18 @@ rat-kill
 rat-media
 rat-ui
 stamp-h1
+test-driver
+tests/*.log
+tests/*.trs
+tests/Makefile
+tests/Makefile.in
+tests/native
+tests/rtone
+tests/test_3d
+tests/test_codecs
+tests/test_convert
+tests/test_pktbuf
+tests/test_rdncy
+tests/test_repair
+tests/test_ts
 version.h

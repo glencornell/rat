@@ -333,5 +333,6 @@ AC_ARG_ENABLE(debug-mem,
                 AC_DEFINE([DEBUG_MEM],[],[DEBUG_MEM])
         fi])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+        tests/Makefile])
 AC_OUTPUT

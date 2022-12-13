@@ -1,4 +1,5 @@
 #include "config_unix.h"
+#include "audio_types.h"
 #include "codec_types.h"
 #include "codec.h"
 
@@ -106,7 +107,7 @@ test_codec(codec_id_t cid, const codec_format_t *cf)
 int main()
 {
         const codec_format_t *cf;
-        u_int32               n_codecs, i;
+        uint32_t               n_codecs, i;
 
         codec_id_t cid;
         codec_init();

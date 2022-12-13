@@ -1,4 +1,5 @@
 #include "config_unix.h"
+#include "audio_types.h"
 #include "codec_types.h"
 #include "codec.h"
 #include "render_3D.h"

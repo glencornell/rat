@@ -1,7 +1,7 @@
 #
 # Makefile for the RAT project.
 #
-SUBDIRS = tests
+SUBDIRS = . tests
 
 ACLOCAL_AMFLAGS=-I m4
 AM_CPPFLAGS=-DHIDE_SOURCE_STRINGS

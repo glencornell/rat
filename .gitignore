@@ -30,6 +30,7 @@ rat
 rat-kill
 rat-media
 rat-ui
+ratconf.h
 stamp-h1
 test-driver
 tests/*.log
@@ -39,6 +40,7 @@ tests/Makefile.in
 tests/native
 tests/rtone
 tests/test_3d
+tests/test_audio_fmt_convert
 tests/test_codecs
 tests/test_convert
 tests/test_pktbuf

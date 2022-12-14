@@ -4,6 +4,8 @@
 #include "audio_types.h"
 #include "audio_fmt.h"
 
+int		 num_sessions = 1;
+
 #define SAMPLES_PER_BLOCK 16
 
 /* Memory debugging.  To check conversion routines do not overstep bounds  */

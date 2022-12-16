@@ -57,7 +57,7 @@ address_is_valid(const char *candidate)
 
         addr = strtok(addr, "/");
         if (udp_addr_valid(addr) == FALSE) {
-                char *msg = "Invalid address: %s";
+                const char *msg = "Invalid address: %s";
 		char *m   = xmalloc(strlen(candidate) + strlen(msg));
 		sprintf(m, msg, candidate);
 		usage(m);
@@ -163,23 +163,6 @@ parse_options_late(struct mbus *m, char *addr, int argc, char *argv[])
         }
         return (i != argc);
 }
-
-static int
-address_count(int argc, char *argv[])
-{
-        const args_handler *a;
-        int                 i;
-
-        for (i = 0; i < argc; i++) {
-                a = cmd_args_handler(argv[i]);
-                if (a == NULL) {
-                        break;
-                }
-                i += a->argc;
-        }
-        return argc - i;
-}
-
 
 static int
 parse_addr(char *arg, char **addr, int *rx_port, int *tx_port)

@@ -7,7 +7,7 @@
  * All rights reserved.
  */
 
-void usage(char *szOffending);
+void usage(const char *szOffending);
 
 typedef struct {
         const char *cmdname;                               /* Command line flag */
@@ -15,5 +15,5 @@ typedef struct {
         int        argc;                                   /* No. of args       */
 } args_handler;
 
-const args_handler *cmd_args_handler(char *cmdname);
+const args_handler *cmd_args_handler(const char *cmdname);
 

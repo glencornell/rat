@@ -21,7 +21,7 @@ static const char cvsid[] = "$Id";
 #include "version.h"
 
 void
-usage(char *szOffending)
+usage(const char *szOffending)
 {
 #ifdef WIN32
 	char win_usage[] = "\
@@ -332,7 +332,7 @@ static args_handler late_args[] = {
 static uint32_t late_args_cnt = sizeof(late_args)/sizeof(late_args[0]);
 
 const args_handler *
-cmd_args_handler(char *cmdname)
+cmd_args_handler(const char *cmdname)
 {
         uint32_t j;
         for (j = 0; j < late_args_cnt; j++) {

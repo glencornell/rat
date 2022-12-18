@@ -38,6 +38,7 @@ tests/*.trs
 tests/Makefile
 tests/Makefile.in
 tests/native
+tests/probeaudio
 tests/rtone
 tests/test_3d
 tests/test_audio_fmt_convert

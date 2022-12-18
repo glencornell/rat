@@ -238,7 +238,7 @@ audio_if_t audio_if_table[] = {
                 NULL
         },
 #endif /* HAVE_OSPREY_AUDIO */
-#ifdef HAVE_ALSA_AUDIO
+#ifdef HAVE_ALSA
         {
                 alsa_audio_init,
                 NULL,
@@ -269,7 +269,7 @@ audio_if_t audio_if_table[] = {
                 alsa_audio_wait_for,
                 alsa_audio_supports
         },
-#endif /* HAVE_ALSA_AUDIO */
+#endif /* HAVE_ALSA */
 #ifdef HAVE_OSS_AUDIO
         {
                 oss_audio_init,

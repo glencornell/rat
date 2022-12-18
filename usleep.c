@@ -42,6 +42,7 @@ int usleep(unsigned int usec)
 		sleeptime.tv_sec  = t2.tv_sec;
 		sleeptime.tv_nsec = t2.tv_nsec;
 	}
+        return 0;
 }
 #endif /* WIN32 */
 

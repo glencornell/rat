@@ -5,7 +5,8 @@ ACLOCAL_AMFLAGS=-I m4
 AM_CPPFLAGS = $(all_includes) -DHIDE_SOURCE_STRINGS $(UCLMMBASE_CFLAGS)
 
 noinst_PROGRAMS = test_convert rtone test_pktbuf test_rdncy test_3d	\
-		native test_codecs test_ts test_repair test_audio_fmt_convert
+		native test_codecs test_ts test_repair			\
+		test_audio_fmt_convert probeaudio
 
 test_convert_SOURCES = test_convert.c
 test_convert_LDADD = $(UCLMMBASE_LIBS) $(top_builddir)/libuclaudio.la	\
@@ -66,3 +67,9 @@ test_audio_fmt_convert_LDADD =  $(UCLMMBASE_LIBS) $(top_builddir)/libuclaudio.la
 	$(top_builddir)/libuclcodec.la					\
 	$(top_builddir)/libuclsndfile.la
 test_audio_fmt_convert_LDFLAGS = $(all_libraries)
+
+probeaudio_SOURCES = probeaudio.c
+probeaudio_CFLAGS = $(UCLMMBASE_CFLAGS)
+probeaudio_LDADD = $(UCLMMBASE_LIBS) $(top_builddir)/libuclaudio.la	\
+	$(top_builddir)/libuclcodec.la
+

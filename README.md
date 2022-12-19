@@ -249,3 +249,28 @@ Networked Applications Programme, Bristish Telecommunications plc, and
 the European Commision (Telematics Applications Programme, Research
 Sector).  It has benefited from hardware donations by Hewlett-Packard
 and Sun Microsystems, and software donations by Microsoft.
+
+## TODO
+
+Feature Enhancements:
+
+- [ ] Add Opus codec
+- [ ] Add 256 bit AES encryption
+- [ ] Create text-based UI for headless operation
+- [ ] Allow full-duplex operation
+- [ ] Publish SDP over SAP
+- [ ] Reduce jitter by switching to realtime scheduler
+
+Refactor:
+
+- [ ] Merge the rat-common code with this, as there is no other applications using rat-common
+- [ ] Organize files into subdirectories
+
+Deprecated capabilities to be removed:
+
+- [ ] Remove DES encryption
+
+Testing:
+
+- [ ] Unit tests
+- [ ] Performance tests

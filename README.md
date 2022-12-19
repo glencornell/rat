@@ -37,16 +37,16 @@ control.
 In addition to the features provided by other Mbone audio conferencing
 tools RAT offers the following additional functionality:
 
-	- Sender based repair of damaged audio streams
-		- FEC in the form of redundant packet transmission
-		- Support for interleaved audio
-	- Received based repair of damaged audio streams
-	- Adaptive scheduling protection
-	- Secure conferencing
-	- Improved statistics and diagnostic features
-	- Conference coordination bus
-	- Transcoder operation
-	- Sound localisation and externalisation
+  - Sender based repair of damaged audio streams
+    - FEC in the form of redundant packet transmission
+    - Support for interleaved audio
+  - Received based repair of damaged audio streams
+  - Adaptive scheduling protection
+  - Secure conferencing
+  - Improved statistics and diagnostic features
+  - Conference coordination bus
+  - Transcoder operation
+  - Sound localisation and externalisation
 
 This list is correct for RAT v3.2, earlier versions have a more limited feature
 set.
@@ -58,7 +58,7 @@ based network, such as the Internet or the Mbone, will occasionally lose
 packets. These lost packets result in broken up audio, which rapidly
 becomes unintelligible as the loss rate increases. RAT implements two
 sender based repair schemes to recover from this problem: [redundant
-transmission](#Redundant Transmission) and [interleaving](#Interleaving).
+transmission](#Redundant%20Transmission) and [interleaving](#Interleaving).
 
 ### Redundant Transmission
 
@@ -75,22 +75,22 @@ Redundant transmission was developed by UCL and INRIA Sophia-Antipolis, as
 part of the MICE/MERCI multimedia conferencing projects. It is discussed
 further in the following papers:
 
-	- Vicky Hardman, Angela Sasse, Mark Handley and Anna Watson,
-	["Reliable Audio for Use over the Internet"](http://www-mice.cs.ucl.ac.uk/multimedia/publications/inet95-rat.ps), in Proceedings of
-	INET'95, June 1995, Honolulu, Hawaii.
+  - Vicky Hardman, Angela Sasse, Mark Handley and Anna Watson,
+  ["Reliable Audio for Use over the Internet"](http://www-mice.cs.ucl.ac.uk/multimedia/publications/inet95-rat.ps), in Proceedings of
+  INET'95, June 1995, Honolulu, Hawaii.
 
-	- Isidor Kouvelas, Orion Hodson, Vicky Hardman and Jon Crowcroft,
-	["Redundancy Control in Real-Time Internet Audio Conferencing"](https://csperkins.org/research/rat/publications/redundancy-avspn97.pdf), in
-	Proceedings of AVSPN 97, September 1997, Aberdeen, Scotland, UK.
+  - Isidor Kouvelas, Orion Hodson, Vicky Hardman and Jon Crowcroft,
+  ["Redundancy Control in Real-Time Internet Audio Conferencing"](https://csperkins.org/research/rat/publications/redundancy-avspn97.pdf), in
+  Proceedings of AVSPN 97, September 1997, Aberdeen, Scotland, UK.
 
-	- Colin Perkins, Isidor Kouvelas, Orion Hodson, Vicky Hardman, Mark
-	Handley, Jean-Chrysostome Bolot, Andres Vega-Garcia, Sacha
-	Fosse-Parisis, ["RTP Payload for Redundant Audio Data"](https://www.csperkins.org/publications/1997/09/rfc2198/rfc2198.txt), IETF
-	Audio/Video Transport Working Group, RFC2198, September 1997.
+  - Colin Perkins, Isidor Kouvelas, Orion Hodson, Vicky Hardman, Mark
+  Handley, Jean-Chrysostome Bolot, Andres Vega-Garcia, Sacha
+  Fosse-Parisis, ["RTP Payload for Redundant Audio Data"](https://www.csperkins.org/publications/1997/09/rfc2198/rfc2198.txt), IETF
+  Audio/Video Transport Working Group, RFC2198, September 1997.
 
-	- C. S. Perkins, O. Hodson & V. Hardman, ["A Survey of Packet-Loss
-	Recovery Techniques for Streaming Audio"](https://www.csperkins.org/publications/1998/09/IEEE-Network-1998/IEEE-Network-1998.pdf), IEEE Network Magazine,
-	September/October 1998.
+  - C. S. Perkins, O. Hodson & V. Hardman, ["A Survey of Packet-Loss
+  Recovery Techniques for Streaming Audio"](https://www.csperkins.org/publications/1998/09/IEEE-Network-1998/IEEE-Network-1998.pdf), IEEE Network Magazine,
+  September/October 1998.
 
 ### Interleaving
 
@@ -132,9 +132,9 @@ means of patching over the remaining loss.
 
 A number of receiver based repair schemes are implemented in RAT:
 
-	- Silence substituation
-	- Packet repetition
-	- Pattern matching repair
+  - Silence substituation
+  - Packet repetition
+  - Pattern matching repair
 
 ### Silence Substitution
 
@@ -175,10 +175,10 @@ algorithms. RAT uses a novel adaptive algorithm, where the DMA driven audio
 playout is used to `cushion' the system against scheduling anomolies. This
 is described in the following paper:
 
-	- Isidor Kouvelas and Vicky Hardman, ["Overcoming Workstation
-	Scheduling Problems in a Real-Time Audio Tool"](https://www.usenix.org/legacy/publications/library/proceedings/ana97/full_papers/kouvelas/kouvelas_html/paper_backup.html), in Proceedings of
-	Usenix Annual Technical Conference, January 1997, Anaheim,
-	California.
+  - Isidor Kouvelas and Vicky Hardman, ["Overcoming Workstation
+  Scheduling Problems in a Real-Time Audio Tool"](https://www.usenix.org/legacy/publications/library/proceedings/ana97/full_papers/kouvelas/kouvelas_html/paper_backup.html), in Proceedings of
+  Usenix Annual Technical Conference, January 1997, Anaheim,
+  California.
 
 ## Secure Conferencing
 
@@ -201,16 +201,16 @@ interface and media engine are separated, and communicate via an IPC
 mechanism. This allows for complete control of RAT by another process
 operating on the same host. Advantages of this split approach include:
 
-	- Customised user-interface: the existing RAT user interface can
-	  easily be replaced, with no loss of functionality.
+  - Customised user-interface: the existing RAT user interface can
+    easily be replaced, with no loss of functionality.
 
-	- Lip-synchronisation: RAT can communicate with a videa tool, to
-	  synchronise audio and video.
+  - Lip-synchronisation: RAT can communicate with a videa tool, to
+    synchronise audio and video.
 
-	- Integration with wide area conference control: a separate
-  	  conference control process may be run on the same host as the
-	  audio/video tools. This can use the conference bus to control the
-	  media tools, to provide, for example H.323 conference control.
+  - Integration with wide area conference control: a separate
+      conference control process may be run on the same host as the
+    audio/video tools. This can use the conference bus to control the
+    media tools, to provide, for example H.323 conference control.
 
 ## Transcoder operation
 
@@ -228,8 +228,8 @@ meaning that the bandwidth requirements are different.
 
 Future developments planned include:
 
-	- Additional codecs, for low bandwidth speech and high quality music.
-	- Investigation of different error recovery techniques.
+  - Additional codecs, for low bandwidth speech and high quality music.
+  - Investigation of different error recovery techniques.
 
 ## Project Background
 

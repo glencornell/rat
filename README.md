@@ -58,7 +58,7 @@ based network, such as the Internet or the Mbone, will occasionally lose
 packets. These lost packets result in broken up audio, which rapidly
 becomes unintelligible as the loss rate increases. RAT implements two
 sender based repair schemes to recover from this problem: [redundant
-transmission](#Redundant%20Transmission) and [interleaving](#Interleaving).
+transmission](#redundant-transmission) and [interleaving](#interleaving).
 
 ### Redundant Transmission
 

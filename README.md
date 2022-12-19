@@ -1,21 +1,28 @@
-Robust-Audio Tool (RAT)
-~~~~~~~~~~~~~~~~~~~~~~~
+# Robust-Audio Tool (RAT)
 
 Copyright (C) 1995-2001 University College London
 All rights reserved.
 
-This software is distributed under license, see the file COPYRIGHT for full
+This software is distributed under license, see the file [COPYRIGHT](COPYRIGHT) for full
 terms and conditions.
 
-Further information, and a list of frequently asked questions (with answers)
-is available from http://www-mice.cs.ucl.ac.uk/multimedia/software/rat/
+## More Information & FAQ
 
-See the file INSTALL.TXT for installation and compilation instructions.
+Further information, and a list of frequently asked questions (with answers)
+is available from <http://www-mice.cs.ucl.ac.uk/multimedia/software/rat/>
+
+## Install
+
+See the file [INSTALL.TXT](INSTALL.md) for installation and compilation instructions.
+
+## Community
 
 Send comments, suggestions and bug-reports to <rat-trap@cs.ucl.ac.uk>. A
 mailing list for general discussion on related issues is now available,
 send mail to <rat-users-request@cs.ucl.ac.uk> to subscribe. All users of
 rat are encouraged to join this list.
+
+## Overview
 
 RAT is a network audio tool that allows users to particpate in audio
 conferences over the internet. These can be between two participants
@@ -44,15 +51,16 @@ tools RAT offers the following additional functionality:
 This list is correct for RAT v3.2, earlier versions have a more limited feature
 set.
 
-Sender based repair of damaged audio streams
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Sender based repair of damaged audio streams
 
-Unless some form of resource reservation protcol (eg: RSVP) is used, an IP
+Unless some form of resource reservation protcol (eg: [RSVP](https://datatracker.ietf.org/doc/html/rfc2205)) is used, an IP
 based network, such as the Internet or the Mbone, will occasionally lose
 packets. These lost packets result in broken up audio, which rapidly
 becomes unintelligible as the loss rate increases. RAT implements two
-sender based repair schemes to recover from this problem: redundant
-transmission and interleaving.
+sender based repair schemes to recover from this problem: [redundant
+transmission](#Redundant Transmission) and [interleaving](#Interleaving).
+
+### Redundant Transmission
 
 Redundant transmission is the means by which a (more) heavily compressed
 copy of a packet is piggy-backed onto the following packet. If the original
@@ -67,22 +75,24 @@ Redundant transmission was developed by UCL and INRIA Sophia-Antipolis, as
 part of the MICE/MERCI multimedia conferencing projects. It is discussed
 further in the following papers:
 
-	Vicky Hardman, Angela Sasse, Mark Handley and Anna Watson,
-	"Reliable Audio for Use over the Internet", in Proceedings of
+	- Vicky Hardman, Angela Sasse, Mark Handley and Anna Watson,
+	["Reliable Audio for Use over the Internet"](http://www-mice.cs.ucl.ac.uk/multimedia/publications/inet95-rat.ps), in Proceedings of
 	INET'95, June 1995, Honolulu, Hawaii.
 
-	Isidor Kouvelas, Orion Hodson, Vicky Hardman and Jon Crowcroft,
-	"Redundancy Control in Real-Time Internet Audio Conferencing", in
+	- Isidor Kouvelas, Orion Hodson, Vicky Hardman and Jon Crowcroft,
+	["Redundancy Control in Real-Time Internet Audio Conferencing"](https://csperkins.org/research/rat/publications/redundancy-avspn97.pdf), in
 	Proceedings of AVSPN 97, September 1997, Aberdeen, Scotland, UK.
 
-	Colin Perkins, Isidor Kouvelas, Orion Hodson, Vicky Hardman, Mark
+	- Colin Perkins, Isidor Kouvelas, Orion Hodson, Vicky Hardman, Mark
 	Handley, Jean-Chrysostome Bolot, Andres Vega-Garcia, Sacha
-	Fosse-Parisis, "RTP Payload for Redundant Audio Data", IETF
+	Fosse-Parisis, ["RTP Payload for Redundant Audio Data"](https://www.csperkins.org/publications/1997/09/rfc2198/rfc2198.txt), IETF
 	Audio/Video Transport Working Group, RFC2198, September 1997.
 
-	C. S. Perkins, O. Hodson & V. Hardman, "A Survey of Packet-Loss
-	Recovery Techniques for Streaming Audio", IEEE Network Magazine,
+	- C. S. Perkins, O. Hodson & V. Hardman, ["A Survey of Packet-Loss
+	Recovery Techniques for Streaming Audio"](https://www.csperkins.org/publications/1998/09/IEEE-Network-1998/IEEE-Network-1998.pdf), IEEE Network Magazine,
 	September/October 1998.
+
+### Interleaving
 
 As an alternative to redundant transmission, recent versions of RAT provide
 the option to send interleaved audio. Units of audio data are resequenced
@@ -103,8 +113,7 @@ use of this technique for interactive applications, although it performs
 well for non-interactive use. The major advantage of interleaving is that
 it does not increase the bandwidth requirements of a stream.
 
-Receiver based repair of damaged audio streams
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Receiver based repair of damaged audio streams
 
 Receiver based recovery schemes rely on producing a replacement for a lost
 packet which is similar to the original. This is possible since audio
@@ -126,6 +135,8 @@ A number of receiver based repair schemes are implemented in RAT:
 	- Silence substituation
 	- Packet repetition
 	- Pattern matching repair
+
+### Silence Substitution
 
 A simple form of receiver based recovery is silence substitution. The gap
 left by a lost packet is filled with silence, to maintain the timing
@@ -156,8 +167,7 @@ Pattern matching repair uses audio before and after the loss to interpolate
 a suitable signal to cover the loss. It performs somewhat better than
 packet repetition, but is significantly more computationally intesive.
 
-Adaptive Scheduling Protection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Adaptive Scheduling Protection
 
 Current general purpose operating systems, such as Unix and Windows 95, do
 not provide adequate support for real-time services in their scheduling
@@ -165,20 +175,18 @@ algorithms. RAT uses a novel adaptive algorithm, where the DMA driven audio
 playout is used to `cushion' the system against scheduling anomolies. This
 is described in the following paper:
 
-	Isidor Kouvelas and Vicky Hardman, " Overcoming Workstation
-	Scheduling Problems in a Real-Time Audio Tool", in Proceedings of
+	- Isidor Kouvelas and Vicky Hardman, ["Overcoming Workstation
+	Scheduling Problems in a Real-Time Audio Tool"](https://www.usenix.org/legacy/publications/library/proceedings/ana97/full_papers/kouvelas/kouvelas_html/paper_backup.html), in Proceedings of
 	Usenix Annual Technical Conference, January 1997, Anaheim,
 	California.
 
-Secure Conferencing
-~~~~~~~~~~~~~~~~~~~
+## Secure Conferencing
 
 RAT allows for secure conferencing, whereby media streams and participant
 identity information can be encrypted using DES. Other encryption
 algorithms can easily be added.
 
-Improved Statistics and diagnostic features
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Improved Statistics and diagnostic features
 
 Like other RTP-based audio tools, RAT provides reception quality
 statistics and user information for all participants in a
@@ -186,8 +194,7 @@ conference. In addition, it has a graphical display of the loss
 to/from each participant, making diagnosis of problems a simple
 matter.
 
-Conference coordination bus
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## Conference coordination bus
 
 RAT implements a conference coordination bus, whereby the user
 interface and media engine are separated, and communicate via an IPC
@@ -205,8 +212,7 @@ operating on the same host. Advantages of this split approach include:
 	  audio/video tools. This can use the conference bus to control the
 	  media tools, to provide, for example H.323 conference control.
 
-Transcoder operation
-~~~~~~~~~~~~~~~~~~~~
+## Transcoder operation
 
 When the bandwidth available is not constant for all participants in a
 conference, or when some participants do not have multicast capable
@@ -218,16 +224,14 @@ together, and the resulting stream is transmitted to the other
 group. This allows for different codecs to be used in each group,
 meaning that the bandwidth requirements are different.
 
-Future research
-~~~~~~~~~~~~~~~
+## Future research
 
 Future developments planned include:
 
 	- Additional codecs, for low bandwidth speech and high quality music.
 	- Investigation of different error recovery techniques.
 
-Project Background
-~~~~~~~~~~~~~~~~~~
+## Project Background
 
 UCL has a well-established multimedia and communications research
 group.  One of the current research topics is multimedia conferencing
@@ -238,8 +242,7 @@ research is aimed at providing software systems on heterogeneous
 workstations (Unix and Windows based). The group has existing
 collaborative and industrially funded application piloting projects.
 
-Sponsors
-~~~~~~~~
+## Sponsors
 
 The RAT project was funded by the EPSRC under the Multimedia and
 Networked Applications Programme, Bristish Telecommunications plc, and

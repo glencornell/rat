@@ -197,7 +197,7 @@ sun_write_hdr(FILE *fp, char **state, const sndfile_fmt_t *fmt)
 }
 
 int
-sun_write_audio(FILE *fp, char *state, sample *buf, int samples)
+sun_write_audio(FILE *fp, char *state, const sample *buf, int samples)
 {
         int i, bytes_per_sample = 1;
         sun_audio_filehdr *saf;
@@ -249,7 +249,7 @@ sun_write_audio(FILE *fp, char *state, sample *buf, int samples)
         fwrite(outbuf, bytes_per_sample, samples, fp);
 
         /* outbuf only equals buf if no sample type conversion was done */
-        if (outbuf != (u_char*)buf) {
+        if (outbuf != (const u_char*)buf) {
                 block_free(outbuf, bytes_per_sample * samples);
         }
 

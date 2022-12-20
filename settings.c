@@ -199,8 +199,8 @@ setting_load(const char *key, char **value)
 #endif
 }
 
-static char *
-setting_load_str(const char *name, char *default_value)
+static const char *
+setting_load_str(const char *name, const char *default_value)
 {
 #ifndef WIN32
         char *value;
@@ -266,7 +266,7 @@ setting_load_int(const char *name, int default_value)
 void settings_load_early(session_t *sp)
 {
 	/* FIXME: This needs to be updated for the transcoder */
-	char				*name, *param, *primary_codec, *port, *silence;
+	const char     			*name, *param, *primary_codec, *port, *silence;
 	int				 freq, chan, mute;
         uint32_t                         i, n, success, device_exists;
 	const cc_details_t              *ccd;
@@ -282,8 +282,9 @@ void settings_load_early(session_t *sp)
 	if (sp->mode == AUDIO_TOOL) {
 		name = setting_load_str("audioDevice", "No Audio Device");
 	} else {
-		name = (char *) xmalloc(20);
-		sprintf(name, "Transcoder Port %d", sp->id+1);
+		char *new_name = (char *) xmalloc(20);
+		sprintf(new_name, "Transcoder Port %d", sp->id+1);
+                name = (const char *) new_name;
 	}
         /* User may not have a (valid) audio device entry in the */
         /* settings file, or have "No Audio Device" there.  In   */
@@ -462,7 +463,8 @@ void settings_load_late(session_t *sp)
         uint32_t my_ssrc;
         struct   utsname u;
         char     hostfmt[] = "RAT v" RAT_VERSION " %s %s (%s)";
-        char    *field, username[32] = "";
+        const char *field;
+        char username[32] = "";
 	load_init();		/* Initial settings come from the common prefs file... */
 
         /*
@@ -499,17 +501,21 @@ void settings_load_late(session_t *sp)
                 rtp_set_sdes(sp->rtp_session[0], my_ssrc, RTCP_SDES_NOTE,   field, strlen(field));
         }
 
-        field = (char*)xmalloc(3 * 256 + sizeof(hostfmt));
-        uname(&u);
-        sprintf(field, hostfmt, u.sysname, u.release, u.machine);
-	rtp_set_sdes(sp->rtp_session[0], my_ssrc, RTCP_SDES_TOOL,  field, strlen(field));
-        xfree(field);
+        {
+          char *new_field = (char*)xmalloc(3 * 256 + sizeof(hostfmt));
+          uname(&u);
+          sprintf(new_field, hostfmt, u.sysname, u.release, u.machine);
+          rtp_set_sdes(sp->rtp_session[0], my_ssrc, RTCP_SDES_TOOL, new_field, strlen(new_field));
+          xfree(new_field);
+        }
 
-	/* This is evil [csp] */
-	field = xstrdup(" rattest");
-	field[0] = 3;
-	rtp_set_sdes(sp->rtp_session[0], my_ssrc, RTCP_SDES_PRIV,  field, strlen(field));
-        xfree(field);
+        {
+          /* This is evil [csp] */
+          char *new_field = xstrdup(" rattest");
+          new_field[0] = 3;
+          rtp_set_sdes(sp->rtp_session[0], my_ssrc, RTCP_SDES_PRIV, new_field, strlen(new_field));
+          xfree(new_field);
+        }
 
         init_part_two();	/* Switch to pulling settings from the RAT specific prefs file... */
 	load_done();
@@ -579,7 +585,7 @@ static void save_done(uint32_t type)
                 while (fgets(linebuf, sizeof(linebuf)/sizeof(linebuf[0]), o) != NULL) {
                         cr_terminate(linebuf, sizeof(linebuf)/sizeof(linebuf[0]));
                         if (linebuf[0] != '*') {
-                                fprintf(n, linebuf);
+                          fprintf(n, "%s", linebuf);
                         } else {
                                 strcpy(keybuf, linebuf);
                                 key = keybuf + 1;       /* Ignore asterisk */
@@ -590,7 +596,7 @@ static void save_done(uint32_t type)
                                         asarray_remove(aa, key);
                                 } else {
                                         /* We have no ideas about this value */
-                                        fprintf(n, linebuf);
+                                  fprintf(n, "%s", linebuf);
                                 }
                         }
                 }

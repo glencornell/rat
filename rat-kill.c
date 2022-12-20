@@ -23,7 +23,7 @@
 #endif
 #include <mbus.h>
 
-static void cmd_handler(char *src, char *cmd, char *arg, void *dat)
+static void cmd_handler(const char *src, const char *cmd, char *arg, void *dat)
 {
 	UNUSED(src);
 	UNUSED(cmd);

@@ -85,7 +85,7 @@ static audio_port_details_t out_ports[] = {
 
 static audio_port_t oport = 0;
 
-#define NUM_OUT_PORTS (sizeof(out_ports)/(sizeof(out_ports[0])))
+#define NUM_OUT_PORTS (int)(sizeof(out_ports)/(sizeof(out_ports[0])))
 
 /*
  * Current open audio device
@@ -118,14 +118,14 @@ static void clear_current()
     current.mixer =  NULL;
     current.index = -1;
     current.info = NULL;
-    current.iport = (audio_port_t)NULL;
+    current.iport = (audio_port_t)0;
 }
 
 
 /*
  * Utility funcs
  */
-static char *encodingToString[] = {
+static const char *encodingToString[] = {
     "PCMU",
     "PCMA",
     "S8",
@@ -181,7 +181,7 @@ static int mapformat(deve_e encoding)
     return format;
 }
 
-__attribute__((unused)) static char* mapstate(snd_pcm_state_t s)
+__attribute__((unused)) static const char* mapstate(snd_pcm_state_t s)
 {
     switch (s) {
       case SND_PCM_STATE_OPEN:
@@ -220,19 +220,18 @@ static void dump_audio_format(audio_format *f)
 
 static void  __attribute__((unused)) dump_alsa_current(snd_pcm_t *handle)
 {
-    int err;
     snd_output_t *out;
 
-    err = snd_output_stdio_attach(&out, stderr, 0);
+    snd_output_stdio_attach(&out, stderr, 0);
     snd_output_printf(out, "--- MY IO\n");
 
-    err = snd_pcm_dump_setup(handle, out);
+    snd_pcm_dump_setup(handle, out);
 
     snd_output_printf(out, "--- SW\n");
-    err = snd_pcm_dump_sw_setup(handle, out);
+    snd_pcm_dump_sw_setup(handle, out);
 
     snd_output_printf(out, "--- HW\n");
-    err = snd_pcm_dump_hw_setup(handle, out);
+    snd_pcm_dump_hw_setup(handle, out);
 
     snd_output_printf(out, "--- DONE\n");
     snd_output_close(out);
@@ -371,7 +370,7 @@ static int open_stream(RatCardInfo *info, pcm_stream_t *stream,
 
 
 // Open a named mixer
-static int open_volume_ctl(char *name, snd_mixer_elem_t **ctl)
+static int open_volume_ctl(const char *name, snd_mixer_elem_t **ctl)
 {
   snd_mixer_selem_id_t *sid;
   int err=0;
@@ -426,7 +425,7 @@ static int open_volume_ctl(char *name, snd_mixer_elem_t **ctl)
 
 static int porder(const void *a, const void *b)
 {
-    return (((port_t*)a)->priority - ((port_t*)b)->priority);
+    return (((const port_t*)a)->priority - ((const port_t*)b)->priority);
 }
 
 /* Not used for now. It seems to cause problems in mbus, however it
@@ -447,7 +446,6 @@ static int setup_mixers()
     snd_mixer_selem_id_t *sid;
     int err;
     unsigned i;
-    int need_cap_switch=1;
     
     snd_mixer_selem_id_alloca(&sid);
 
@@ -501,7 +499,6 @@ static int setup_mixers()
       }
     }
     if (!open_volume_ctl(RAT_ALSA_MIXER_CAPTURE_NAME, &current.rxgain)) {
-      need_cap_switch=0;
       current.rxgain=0;
     }
 
@@ -841,7 +838,8 @@ alsa_audio_get_ogain(audio_desc_t ad)
 int alsa_audio_read(audio_desc_t ad __attribute__((unused)),
                 u_char *buf, int bytes)
 {
-    snd_pcm_sframes_t fread, bread, avail;
+    snd_pcm_sframes_t fread, avail;
+    snd_pcm_sframes_t bread = 0;
     int err;
     long read_interval;
     struct timeval          curr_time;
@@ -918,9 +916,8 @@ int alsa_audio_read(audio_desc_t ad __attribute__((unused)),
 int alsa_audio_write(audio_desc_t ad __attribute__((unused)),
                      u_char *buf, int bytes)
 {
-    int fwritten, err, num_bytes=0 ,read_interval;
+    int fwritten, err, num_bytes=0;
     struct timeval          curr_time;
-    static struct timeval          last_read_time;
     snd_pcm_sframes_t delay;
     snd_pcm_sframes_t frames =
         snd_pcm_bytes_to_frames(current.tx.handle,bytes);
@@ -948,13 +945,7 @@ int alsa_audio_write(audio_desc_t ad __attribute__((unused)),
     default:
       break;
     }
-    read_interval = (curr_time.tv_sec  - last_read_time.tv_sec) * 1000000 + (curr_time.tv_usec - last_read_time.tv_usec);
     snd_pcm_delay(current.tx.handle, &delay);
-
-    //debug_msg("Frames avail to be written=%d, time diff=%d, Trying to write %d frames, Curr delay %d \n",snd_pcm_avail_update(current.tx.handle), read_interval, frames, delay);
-    //snd_pcm_status_dump(status, output);
-    last_read_time.tv_sec=curr_time.tv_sec;
-    last_read_time.tv_usec=curr_time.tv_usec;
 
     fwritten = snd_pcm_writei(current.tx.handle, buf, frames);
     if (fwritten >= 0) {
@@ -1164,7 +1155,6 @@ int alsa_audio_is_ready(audio_desc_t ad __attribute__((unused)))
     snd_pcm_status_t *status;
     snd_pcm_uframes_t avail;
     int err;
-    snd_pcm_sframes_t frames;
     snd_output_t *output = NULL;
 
     snd_output_stdio_attach(&output, stdout, 0);
@@ -1203,7 +1193,7 @@ void alsa_audio_wait_for(audio_desc_t ad __attribute__((unused)), int delay_ms)
 }
 
 
-char* alsa_get_device_name(audio_desc_t idx)
+const char* alsa_get_device_name(audio_desc_t idx)
 {
     debug_msg("Get name for card %d: \"%s\"\n", idx, ratCards[idx].name);
     return ratCards[idx].name;

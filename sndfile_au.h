@@ -18,7 +18,7 @@ int sun_read_audio(FILE *pf, char* state, sample *buf, int samples); /* Returns 
 
 int sun_write_hdr(FILE *fp, char **state, const sndfile_fmt_t *fmt);
 
-int sun_write_audio(FILE *fp, char *state, sample *buf, int samples);
+int sun_write_audio(FILE *fp, char *state, const sample *buf, int samples);
 
 int sun_free_state(char **state);
 

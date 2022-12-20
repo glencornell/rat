@@ -25,7 +25,7 @@ int  redundancy_encoder_encode  (u_char                  *state,
                                  struct s_pb *out,
                                  uint32_t                  units_per_packet);
 
-int  redundancy_encoder_set_parameters(u_char *state, char *cmd);
+int  redundancy_encoder_set_parameters(u_char *state, const char *cmd);
 int  redundancy_encoder_get_parameters(u_char *state, char *buf, uint32_t blen);
 
 /* Decoder functions *********************************************************/

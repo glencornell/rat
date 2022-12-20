@@ -521,7 +521,7 @@ LowDec(unsigned char *cw, sample *data, int_32 state[], sample *ns_state)
     int    StepsizeIndex;
     register int_32  lbInput, lbCWTrain;
     int_32 Estimate;
-    int_32 Stepsize, InvStepsize;
+    int_32 Stepsize;
     int_32 oldStepsize;
     int    i, j;
     int    column;
@@ -544,7 +544,6 @@ LowDec(unsigned char *cw, sample *data, int_32 state[], sample *ns_state)
     }
     Estimate = state[5];
     Stepsize = aStepsizes[StepsizeIndex];
-    InvStepsize = aInvStepsizes[StepsizeIndex];
 
     for (i=0; i<(SAMPLES_PER_WBS_UNIT/2); i++) {
          #if LO_STATE_DBG
@@ -598,9 +597,8 @@ LowDec(unsigned char *cw, sample *data, int_32 state[], sample *ns_state)
 	StepsizeIndex = aStepsizeIndex[StepsizeIndex][column];
 	oldStepsize = Stepsize;
 	Stepsize = aStepsizes[StepsizeIndex];
-	InvStepsize = aInvStepsizes[StepsizeIndex];
 #if LO_DEC_DBG
-	    fprintf(DebDataRaw, "%d;%d;%d;%d;", column, StepsizeIndex, Stepsize, InvStepsize);
+	    fprintf(DebDataRaw, "%d;%d;%d;", column, StepsizeIndex, Stepsize);
 #endif
 
 	/* Phase 7 */
@@ -776,7 +774,7 @@ HighDec(unsigned char *cw, sample *data, int_32 state[])
     int    StepsizeIndex = state[0];
     register int_32  lbInput, lbCWTrain;
     int_32 Estimate = state[1];
-    int_32 Stepsize = aStepsizes[StepsizeIndex], InvStepsize = aInvStepsizes[StepsizeIndex];
+    int_32 Stepsize = aStepsizes[StepsizeIndex];
     int_32 oldStepsize;
     int    i;
     int    column;
@@ -841,9 +839,8 @@ HighDec(unsigned char *cw, sample *data, int_32 state[])
 	StepsizeIndex = aHighSSIndex[StepsizeIndex][column];
 	oldStepsize = Stepsize;
 	Stepsize = aStepsizes[StepsizeIndex];
-	InvStepsize = aInvStepsizes[StepsizeIndex];
 #if HI_DEC_DBG
-	    fprintf(DebDataRaw, "%d;%d;%d;%d;", column, StepsizeIndex, Stepsize, InvStepsize);
+	    fprintf(DebDataRaw, "%d;%d;%d;", column, StepsizeIndex, Stepsize);
 #endif
 
 	/* Phase 7 */

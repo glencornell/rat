@@ -18,7 +18,7 @@ int raw_read_audio(FILE *pf, char* state, sample *buf, int samples); /* Returns 
 
 int raw_write_hdr(FILE *fp, char **state, const sndfile_fmt_t *fmt);
 
-int raw_write_audio(FILE *fp, char *state, sample *buf, int samples);
+int raw_write_audio(FILE *fp, char *state, const sample *buf, int samples);
 
 int raw_free_state(char **state);
 

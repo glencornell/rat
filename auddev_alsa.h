@@ -55,6 +55,6 @@ int  alsa_audio_supports  (audio_desc_t ad, audio_format *fmt);
 
 int alsa_audio_init (void);
 int alsa_get_device_count (void);
-char *alsa_get_device_name (audio_desc_t idx);
+const char *alsa_get_device_name (audio_desc_t idx);
 
 #endif /* _AUDDEV_ALSA_H_ */

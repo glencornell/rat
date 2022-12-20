@@ -11,6 +11,6 @@
 #ifndef _MBUS_UI_H
 #define _MBUS_UI_H
 
-void mbus_ui_rx(char *srce, char *cmnd, char *args, void *data);
+void mbus_ui_rx(const char *srce, const char *cmnd, char *args, void *data);
 
 #endif

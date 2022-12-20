@@ -10,7 +10,6 @@
  * All rights reserved.
  */
 
-#ifndef HAVE_USLEEP
 #ifndef HIDE_SOURCE_STRINGS
 static const char cvsid[] =
 	"$Id: usleep.c 3642 2004-01-12 17:14:56Z ucacoxh $";
@@ -19,6 +18,7 @@ static const char cvsid[] =
 #include "config_unix.h"
 #include "config_win32.h"
 
+#ifndef HAVE_USLEEP
 #ifdef WIN32
 int usleep(unsigned int usec)
 {

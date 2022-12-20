@@ -57,7 +57,8 @@ voxlet_create  (voxlet_t          **ppv,
         sndfile_fmt_t        sfmt;
         voxlet_t            *pv;
         pdb_entry_t         *pdbe;
-	char                *filename, *voxdir;
+	char                *filename;
+        const char          *voxdir;
 
 	voxdir = getenv("VOXLETDIR");
 	if (voxdir == NULL) {

@@ -75,7 +75,7 @@ static int      min_devices = 1 + 8;
  * Information on each audio device
  */
 typedef struct audio_dinfo {
-	char           *dev_name;	/* Audio device name */
+	const char           *dev_name;	/* Audio device name */
 	int             fd;	/* File descriptor */
 	int             audio_props;	/* Audio device properties */
 	audio_device_t  audio_dev;	/* Kernel device names */
@@ -89,7 +89,7 @@ typedef struct audio_dinfo {
  * Information on each mixer device
  */
 typedef struct mixer_dinfo {
-	char           *dev_name;	/* Mixer device name */
+	const char           *dev_name;	/* Mixer device name */
 	int             fd;	/* File descriptor */
 }               mixer_dinfo_t;
 
@@ -145,7 +145,7 @@ typedef struct play_gain {
  * Table of all detected audio devices and their corresponding mixer devices
  */
 typedef struct audio_devices {
-	char           *full_name;
+	const char           *full_name;
 	audio_dinfo_t   audio_info;
 	mixer_dinfo_t   mixer_info;
 	play_gain_t     play;
@@ -371,7 +371,7 @@ netbsd_audio_device_count()
  * netbsd_audio_device_name: return the full audio device name
  */
 
-char           *
+const char           *
 netbsd_audio_device_name(audio_desc_t ad)
 {
 	assert(audio_devices && n_devices > ad);

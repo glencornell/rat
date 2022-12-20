@@ -46,7 +46,7 @@ int       _channel_coder_reset       (struct s_channel_state *cs,  int is_encode
 int       channel_encoder_set_units_per_packet (struct s_channel_state *cs, uint16_t);
 uint16_t   channel_encoder_get_units_per_packet (struct s_channel_state *cs);
 
-int       channel_encoder_set_parameters (struct s_channel_state *cs, char *cmd);
+int       channel_encoder_set_parameters (struct s_channel_state *cs, const char *cmd);
 int       channel_encoder_get_parameters (struct s_channel_state *cs, char *cmd, int cmd_len);
 
 int       channel_encoder_encode (struct s_channel_state  *cs,

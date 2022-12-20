@@ -47,6 +47,6 @@ int  newpcm_audio_supports  (audio_desc_t ad, audio_format *f);
 /* Functions to get names of devices */
 int         newpcm_audio_query_devices (void);
 int         newpcm_get_device_count    (void);
-char       *newpcm_get_device_name     (audio_desc_t ad);
+const char       *newpcm_get_device_name     (audio_desc_t ad);
 
 #endif /* _AUDDEV_NEWPCM_H_ */

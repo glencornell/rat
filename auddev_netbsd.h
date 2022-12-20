@@ -42,7 +42,7 @@
 
 int             netbsd_audio_init(void);
 int             netbsd_audio_device_count(void);
-char           *netbsd_audio_device_name(audio_desc_t);
+const char           *netbsd_audio_device_name(audio_desc_t);
 int             netbsd_audio_open(audio_desc_t, audio_format *, audio_format *);
 void            netbsd_audio_close(audio_desc_t);
 void            netbsd_audio_drain(audio_desc_t);

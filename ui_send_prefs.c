@@ -30,7 +30,7 @@ static const char cvsid[] =
 #include "ui_send_prefs.h"
 
 void
-ui_send_converter_list(session_t *sp, char *addr)
+ui_send_converter_list(session_t *sp, const char *addr)
 {
         const converter_details_t *details;
         char *mbes;
@@ -50,7 +50,7 @@ ui_send_converter_list(session_t *sp, char *addr)
 }
 
 void
-ui_send_converter(session_t *sp, char *addr)
+ui_send_converter(session_t *sp, const char *addr)
 {
         const converter_details_t *details;
         char *mbes;
@@ -72,7 +72,7 @@ ui_send_converter(session_t *sp, char *addr)
 }
 
 void
-ui_send_repair_scheme_list(session_t *sp, char *addr)
+ui_send_repair_scheme_list(session_t *sp, const char *addr)
 {
         const repair_details_t *r;
         char *mbes;
@@ -91,7 +91,7 @@ ui_send_repair_scheme_list(session_t *sp, char *addr)
 }
 
 void
-ui_send_codec_details(session_t *sp, char *addr, codec_id_t cid)
+ui_send_codec_details(session_t *sp, const char *addr, codec_id_t cid)
 {
         char 			*caps, *long_name_e, *short_name_e, *pay_e, *descr_e;
         int 			 can_enc, can_dec, layers;
@@ -151,7 +151,7 @@ ui_send_codec_details(session_t *sp, char *addr, codec_id_t cid)
 }
 
 void
-ui_send_codec_list(session_t *sp, char *addr)
+ui_send_codec_list(session_t *sp, const char *addr)
 {
         uint32_t nCodecs, iCodec;
         codec_id_t cid;
@@ -171,11 +171,11 @@ static uint32_t sample_rates[] = {
 #define NUM_RATES (sizeof(sample_rates) / sizeof(sample_rates[0]))
 
 void
-ui_send_sampling_mode_list(session_t *sp, char *addr)
+ui_send_sampling_mode_list(session_t *sp, const char *addr)
 {
 	char	*mbes;
         char    modes[255]="";
-        char    tmp[22];
+        char    tmp[30];
         uint16_t channels, support, zap, i;
 
 	if (!sp->ui_on) return;
@@ -188,7 +188,7 @@ ui_send_sampling_mode_list(session_t *sp, char *addr)
 			}
                 }
                 switch(support) {
-                case 3: sprintf(tmp, "%d-kHz,Mono,Stereo ", sample_rates[i]/1000); break;
+                case 3: sprintf(tmp, "%2d-kHz,Mono,Stereo ", sample_rates[i]/1000); break;
                 case 2: sprintf(tmp, "%d-kHz,Stereo ", sample_rates[i]/1000);      break;
                 case 1: sprintf(tmp, "%d-kHz,Mono ", sample_rates[i]/1000);        break;
                 case 0: continue;
@@ -209,7 +209,7 @@ ui_send_sampling_mode_list(session_t *sp, char *addr)
 }
 
 static void
-ui_update_boolean(session_t *sp, char *addr, const char *field, int boolval)
+ui_update_boolean(session_t *sp, const char *addr, const char *field, int boolval)
 {
         if (boolval) {
                 mbus_qmsg(sp->mbus_engine, addr, field, "1", TRUE);
@@ -219,14 +219,14 @@ ui_update_boolean(session_t *sp, char *addr, const char *field, int boolval)
 }
 
 void
-ui_send_powermeter(session_t *sp, char *addr)
+ui_send_powermeter(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         ui_update_boolean(sp, addr, "tool.rat.powermeter", sp->meter);
 }
 
 void
-ui_send_playout_bounds(session_t *sp, char *addr)
+ui_send_playout_bounds(session_t *sp, const char *addr)
 {
         char tmp[6];
 	if (!sp->ui_on) return;
@@ -238,28 +238,28 @@ ui_send_playout_bounds(session_t *sp, char *addr)
 }
 
 void
-ui_send_agc(session_t *sp, char *addr)
+ui_send_agc(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         ui_update_boolean(sp, addr, "tool.rat.agc", sp->agc_on);
 }
 
 void
-ui_send_loopback_gain(session_t *sp, char *addr)
+ui_send_loopback_gain(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         ui_update_boolean(sp, addr, "tool.rat.loopback.gain", sp->loopback_gain);
 }
 
 void
-ui_send_echo_suppression(session_t *sp, char *addr)
+ui_send_echo_suppression(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         ui_update_boolean(sp, addr, "tool.rat.echo.suppress", sp->echo_suppress);
 }
 
 void
-ui_send_lecture_mode(session_t *sp, char *addr)
+ui_send_lecture_mode(session_t *sp, const char *addr)
 {
 	/* Update the UI to reflect the lecture mode setting...*/
 	if (!sp->ui_on) return;
@@ -267,7 +267,7 @@ ui_send_lecture_mode(session_t *sp, char *addr)
 }
 
 void
-ui_send_encryption_key(session_t *sp, char *addr)
+ui_send_encryption_key(session_t *sp, const char *addr)
 {
 	char	*key_e;
 
@@ -283,7 +283,7 @@ ui_send_encryption_key(session_t *sp, char *addr)
 }
 
 void
-ui_send_device_config(session_t *sp, char *addr)
+ui_send_device_config(session_t *sp, const char *addr)
 {
         char          		 fmt_buf[64], *mbes;
         const audio_format 	*af;
@@ -300,7 +300,7 @@ ui_send_device_config(session_t *sp, char *addr)
 }
 
 void
-ui_send_rate(session_t *sp, char *addr)
+ui_send_rate(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
 	mbus_qmsgf(sp->mbus_engine, addr, TRUE, "tool.rat.rate", "%3d", channel_encoder_get_units_per_packet(sp->channel_coder));

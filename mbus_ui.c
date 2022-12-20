@@ -26,7 +26,7 @@ extern int	 got_detach;
 extern int	 got_quit;
 
 /* Mbus command reception function type */
-typedef void (*mbus_rx_proc)(char *srce, char *args);
+typedef void (*mbus_rx_proc)(const char *srce, char *args);
 
 /* Tuple to associate string received with it's parsing fn */
 typedef struct {
@@ -34,7 +34,7 @@ typedef struct {
         mbus_rx_proc  rxproc;
 } mbus_cmd_tuple;
 
-static void rx_tool_rat_ui_detach(char *srce, char *args)
+static void rx_tool_rat_ui_detach(const char *srce, char *args)
 {
 	UNUSED(srce);
 	UNUSED(args);
@@ -42,13 +42,13 @@ static void rx_tool_rat_ui_detach(char *srce, char *args)
 	got_detach = TRUE;
 }
 
-static void rx_mbus_hello(char *srce, char *args)
+static void rx_mbus_hello(const char *srce, char *args)
 {
 	UNUSED(srce);
 	UNUSED(args);
 }
 
-static void rx_mbus_waiting(char *srce, char *args)
+static void rx_mbus_waiting(const char *srce, char *args)
 {
 	char			*s;
 	struct mbus_parser	*mp;
@@ -74,7 +74,7 @@ static void rx_mbus_waiting(char *srce, char *args)
 	mbus_parse_done(mp);
 }
 
-static void rx_mbus_quit(char *srce, char *args)
+static void rx_mbus_quit(const char *srce, char *args)
 {
 	UNUSED(args);
 	should_exit = TRUE;
@@ -82,7 +82,7 @@ static void rx_mbus_quit(char *srce, char *args)
 	debug_msg("Got mbus.quit() from %s\n", srce);
 }
 
-static void rx_mbus_bye(char *srce, char *args)
+static void rx_mbus_bye(const char *srce, char *args)
 {
 	UNUSED(args);
 	UNUSED(srce);
@@ -98,7 +98,7 @@ static const mbus_cmd_tuple ui_cmds[] = {
 
 #define NUM_UI_CMDS sizeof(ui_cmds)/sizeof(ui_cmds[0])
 
-void mbus_ui_rx(char *srce, char *cmnd, char *args, void *data)
+void mbus_ui_rx(const char *srce, const char *cmnd, char *args, void *data)
 {
 	char        	 command[1500];
 	unsigned int 	 i;

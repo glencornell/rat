@@ -34,7 +34,7 @@ static const char cvsid[] =
 typedef int (*pf_open_hdr)    (FILE *, char **state, sndfile_fmt_t *fmt);
 typedef int (*pf_read_audio)  (FILE *, char * state, sample *buf, int samples);
 typedef int (*pf_write_hdr)   (FILE *, char **state, const sndfile_fmt_t *);
-typedef int (*pf_write_audio) (FILE *, char * state, sample *buf, int samples);
+typedef int (*pf_write_audio) (FILE *, char * state, const sample *buf, int samples);
 typedef int (*pf_write_end)   (FILE *, char *state);
 typedef int (*pf_free_state)  (char **state);
 typedef int (*pf_get_format)  (char *state, sndfile_fmt_t *fmt);
@@ -103,7 +103,7 @@ typedef struct s_sndfile {
 } sndfile_t;
 
 int
-snd_read_open (sndfile_t **sndfile, char *path, sndfile_fmt_t *fmt)
+snd_read_open (sndfile_t **sndfile, const char *path, sndfile_fmt_t *fmt)
 {
         sndfile_t *s;
         FILE       *fp;
@@ -184,11 +184,11 @@ snd_read_audio(sndfile_t **sf, sample *buf, uint16_t samples)
         return samples_read;
 }
 
-static char *
-snd_get_extension(char *path)
+static const char *
+snd_get_extension(const char *path)
 {
         if (path) {
-                char *ext = path + strlen(path) - 1;
+                const char *ext = path + strlen(path) - 1;
                 while(ext > path) {
                         if (*ext == '.') return ext + 1;
                         ext--;
@@ -198,12 +198,12 @@ snd_get_extension(char *path)
 }
 
 int
-snd_write_open (sndfile_t **sf, char *path, char *default_extension, const sndfile_fmt_t *fmt)
+snd_write_open (sndfile_t **sf, const char *path, const char *default_extension, const sndfile_fmt_t *fmt)
 {
         sndfile_t *s;
         FILE       *fp;
         int         i;
-        char *extension;
+        const char *extension;
 
         if (*sf) {
                 debug_msg("File not closed before opening\n");
@@ -269,7 +269,7 @@ snd_write_close(sndfile_t **pps)
 }
 
 int
-snd_write_audio(sndfile_t **pps, sample *buf, uint16_t buf_len)
+snd_write_audio(sndfile_t **pps, const sample *buf, uint16_t buf_len)
 {
         sndfile_t *ps = *pps;
         int success;

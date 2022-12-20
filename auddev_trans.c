@@ -487,7 +487,7 @@ trans_audio_device_count()
         return MAXBUFDEVS;
 }
 
-char*
+const char*
 trans_audio_device_name(audio_desc_t ad)
 {
         ad = mapAudioDescToDeviceID(ad);

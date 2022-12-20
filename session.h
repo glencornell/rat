@@ -55,7 +55,7 @@ typedef struct s_session {
 	struct s_session	*other_session;			/* Only valid when we're a transcoder... */
         short           	 id;   				/* unique session id */
 	int			 mode; 				/* audio tool, transcoder */
-        char            	*title;
+        const char            	*title;
 	char            	 asc_address[MAX_LAYERS][MAXHOSTNAMELEN+1];
 	u_short	        	 rx_rtp_port[MAX_LAYERS];
 	u_short	        	 tx_rtp_port[MAX_LAYERS];

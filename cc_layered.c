@@ -68,15 +68,16 @@ layered_encoder_destroy(u_char **state, uint32_t len)
 }
 
 int
-layered_encoder_set_parameters(u_char *state, char *cmd)
+layered_encoder_set_parameters(u_char *state, const char *_cmd)
 {
-        u_char     *nbuf;
+        u_char     *nbuf = 0;
         lay_state  *n, *cur;
         codec_id_t  cid;
         char       *s;
         uint8_t     layers;
         uint32_t    nl;
         int success = FALSE;
+        char *cmd = strdup(_cmd);
 
         assert(state != NULL);
         assert(cmd   != NULL);
@@ -123,6 +124,7 @@ layered_encoder_set_parameters(u_char *state, char *cmd)
 done:
         nbuf = (u_char*)n;
         layered_encoder_destroy(&nbuf, nl);
+        free(cmd);
         return success;
 }
 

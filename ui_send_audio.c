@@ -36,7 +36,7 @@ static const char cvsid[] =
 #define SECS_BETWEEN_1900_1970 2208988800u
 
 void
-ui_send_audio_input_port(session_t *sp, char *addr)
+ui_send_audio_input_port(session_t *sp, const char *addr)
 {
         const audio_port_details_t 	*apd = NULL;
         audio_port_t 			 port;
@@ -67,7 +67,7 @@ ui_send_audio_input_port(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_input_port_list(session_t *sp, char *addr)
+ui_send_audio_input_port_list(session_t *sp, const char *addr)
 {
         const audio_port_details_t *apd;
         char *mbes;
@@ -88,7 +88,7 @@ ui_send_audio_input_port_list(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_input_mute(session_t *sp, char *addr)
+ui_send_audio_input_mute(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
 	if (tx_is_sending(sp->tb)) {
@@ -99,14 +99,14 @@ ui_send_audio_input_mute(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_input_gain(session_t *sp, char *addr)
+ui_send_audio_input_gain(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         mbus_qmsgf(sp->mbus_engine, addr, TRUE, "audio.input.gain", "%3d", audio_get_igain(sp->audio_device));
 }
 
 void
-ui_send_audio_input_powermeter(session_t *sp, char *addr, int level)
+ui_send_audio_input_powermeter(session_t *sp, const char *addr, int level)
 {
 	static int	ol;
 
@@ -122,7 +122,7 @@ ui_send_audio_input_powermeter(session_t *sp, char *addr, int level)
 }
 
 void
-ui_send_audio_output_port(session_t *sp, char *addr)
+ui_send_audio_output_port(session_t *sp, const char *addr)
 {
         const audio_port_details_t 	*apd = NULL;
         audio_port_t 			 port;
@@ -154,7 +154,7 @@ ui_send_audio_output_port(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_output_port_list(session_t *sp, char *addr)
+ui_send_audio_output_port_list(session_t *sp, const char *addr)
 {
         const audio_port_details_t *apd;
         char *mbes;
@@ -175,7 +175,7 @@ ui_send_audio_output_port_list(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_output_mute(session_t *sp, char *addr)
+ui_send_audio_output_mute(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
 	if (sp->playing_audio) {
@@ -186,7 +186,7 @@ ui_send_audio_output_mute(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_output_gain(session_t *sp, char *addr)
+ui_send_audio_output_gain(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         mbus_qmsgf(sp->mbus_engine, addr, TRUE, "audio.output.gain", "%3d", audio_get_ogain(sp->audio_device));
@@ -194,7 +194,7 @@ ui_send_audio_output_gain(session_t *sp, char *addr)
 
 
 void
-ui_send_audio_output_powermeter(session_t *sp, char *addr, int level)
+ui_send_audio_output_powermeter(session_t *sp, const char *addr, int level)
 {
 	static int	ol;
         assert(level>=0 && level <=100);
@@ -209,7 +209,7 @@ ui_send_audio_output_powermeter(session_t *sp, char *addr, int level)
 }
 
 void
-ui_send_audio_device_list(session_t *sp, char *addr)
+ui_send_audio_device_list(session_t *sp, const char *addr)
 {
         const audio_device_details_t *add;
         char *mbes, dev_name[AUDIO_DEVICE_NAME_LENGTH];
@@ -221,7 +221,7 @@ ui_send_audio_device_list(session_t *sp, char *addr)
 
         for(i = 0; i < nDev; i++) {
                 add  = audio_get_device_details(i);
-                strncpy(dev_name, add->name, AUDIO_DEVICE_NAME_LENGTH);
+                strncpy(dev_name, add->name, AUDIO_DEVICE_NAME_LENGTH - 1);
                 purge_chars(dev_name, "[]()");
                 mbes = mbus_encode_str(dev_name);
                 mbus_qmsg(sp->mbus_engine, addr, "audio.devices.add", mbes, TRUE);
@@ -230,7 +230,7 @@ ui_send_audio_device_list(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_device(session_t *sp, char *addr)
+ui_send_audio_device(session_t *sp, const char *addr)
 {
         const audio_device_details_t *add = NULL;
         char                         *mbes;
@@ -247,7 +247,7 @@ ui_send_audio_device(session_t *sp, char *addr)
 
         if (i != n) {
                 char dev_name[AUDIO_DEVICE_NAME_LENGTH];
-                strncpy(dev_name, add->name, AUDIO_DEVICE_NAME_LENGTH);
+                strncpy(dev_name, add->name, AUDIO_DEVICE_NAME_LENGTH - 1);
                 purge_chars(dev_name, "()[]");
                 mbes = mbus_encode_str(dev_name);
                 mbus_qmsg(sp->mbus_engine, addr, "audio.device", mbes, TRUE);
@@ -256,7 +256,7 @@ ui_send_audio_device(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_suppress_silence(session_t *sp, char *addr)
+ui_send_audio_suppress_silence(session_t *sp, const char *addr)
 {
         const char *name;
         char thresh[6];
@@ -290,7 +290,7 @@ ui_send_audio_suppress_silence(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_channel_repair(session_t *sp, char *addr)
+ui_send_audio_channel_repair(session_t *sp, const char *addr)
 {
         const repair_details_t *r;
         uint16_t i, n;
@@ -344,7 +344,7 @@ ui_update_interleaving(session_t *sp)
 */
 
 static void
-ui_update_redundancy(session_t *sp, char *addr)
+ui_update_redundancy(session_t *sp, const char *addr)
 {
         const codec_format_t *scf;
         codec_id_t            scid;
@@ -406,7 +406,7 @@ redundancy_update_end:
 }
 
 static void
-ui_update_layering(session_t *sp, char *addr)
+ui_update_layering(session_t *sp, const char *addr)
 {
         const codec_format_t *lcf;
         codec_id_t            lcid;
@@ -452,7 +452,7 @@ layering_update_end:
 }
 
 void
-ui_send_audio_channel_coding(session_t *sp, char *addr)
+ui_send_audio_channel_coding(session_t *sp, const char *addr)
 {
         const cc_details_t *ccd;
 
@@ -484,7 +484,7 @@ ui_send_audio_channel_coding(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_codec(session_t *sp, char *addr)
+ui_send_audio_codec(session_t *sp, const char *addr)
 {
 	codec_id_t            pri_id;
         const codec_format_t *pri_cf;
@@ -514,7 +514,7 @@ ui_send_audio_codec(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_file_play_ready(session_t *sp, char *addr, char *name)
+ui_send_audio_file_play_ready(session_t *sp, const char *addr, const char *name)
 {
         char *mbes;
 	if (!sp->ui_on) return;
@@ -524,7 +524,7 @@ ui_send_audio_file_play_ready(session_t *sp, char *addr, char *name)
 }
 
 void
-ui_send_audio_file_record_ready(session_t *sp, char *addr, char *name)
+ui_send_audio_file_record_ready(session_t *sp, const char *addr, const char *name)
 {
         char *mbes;
 	if (!sp->ui_on) return;
@@ -534,7 +534,7 @@ ui_send_audio_file_record_ready(session_t *sp, char *addr, char *name)
 }
 
 void
-ui_send_audio_file_alive(session_t *sp, char *addr, char *mode, int valid)
+ui_send_audio_file_alive(session_t *sp, const char *addr, const char *mode, int valid)
 {
         char cmd[32], arg[2];
 
@@ -547,7 +547,7 @@ ui_send_audio_file_alive(session_t *sp, char *addr, char *mode, int valid)
 }
 
 void
-ui_send_audio_3d_options(session_t *sp, char *addr)
+ui_send_audio_3d_options(session_t *sp, const char *addr)
 {
         char args[256], tmp[5];
         char *mbes;
@@ -582,14 +582,14 @@ ui_send_audio_3d_options(session_t *sp, char *addr)
 }
 
 void
-ui_send_audio_3d_enabled(session_t *sp, char *addr)
+ui_send_audio_3d_enabled(session_t *sp, const char *addr)
 {
 	if (!sp->ui_on) return;
         mbus_qmsgf(sp->mbus_engine, addr, TRUE, "audio.3d.enabled", "%d", (sp->render_3d ? 1 : 0));
 }
 
 void
-ui_send_audio_3d_settings(session_t *sp, char *addr, uint32_t ssrc)
+ui_send_audio_3d_settings(session_t *sp, const char *addr, uint32_t ssrc)
 {
         char *filter_name;
         int   azimuth, filter_type, filter_length;
@@ -611,7 +611,7 @@ ui_send_audio_3d_settings(session_t *sp, char *addr, uint32_t ssrc)
 }
 
 void
-ui_send_audio_update(session_t *sp, char *addr)
+ui_send_audio_update(session_t *sp, const char *addr)
 {
         ui_send_audio_device_list     (sp, addr);
         ui_send_audio_device          (sp, addr);

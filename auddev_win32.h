@@ -46,6 +46,6 @@ int  w32sdk_audio_supports  (audio_desc_t ad, audio_format *paf);
 int   w32sdk_audio_init(void);		/* Startup initialization                   */
 int   w32sdk_audio_free(void);		/* Free the device... what a concept!       */
 int   w32sdk_get_device_count(void);	/* Then this one tells us the number of 'em */
-char *w32sdk_get_device_name(int idx);	/* Then this one tells us the name          */
+const char *w32sdk_get_device_name(int idx);	/* Then this one tells us the name          */
 
 #endif /* _AUDDEV_W32SDK_H_ */

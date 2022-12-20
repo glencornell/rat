@@ -114,7 +114,7 @@ riff_fix_chunk_hdr(riff_chunk *rc)
 }
 
 static uint32_t
-riff_proceed_to_chunk(FILE *fp, char *id)
+riff_proceed_to_chunk(FILE *fp, const char *id)
 {
         riff_chunk rc;
         uint32_t ckId;
@@ -351,7 +351,7 @@ riff_write_hdr(FILE *fp, char **state, const sndfile_fmt_t *fmt)
 }
 
 int
-riff_write_audio(FILE *fp, char *state, sample *buf, int samples)
+riff_write_audio(FILE *fp, char *state, const sample *buf, int samples)
 {
         int i, bytes_per_sample = 1;
         riff_state *rs = (riff_state*)state;
@@ -404,7 +404,7 @@ riff_write_audio(FILE *fp, char *state, sample *buf, int samples)
         rs->cbUsed += bytes_per_sample * samples;
 
         /* outbuf only equals buf if no sample conversion done */
-        if (outbuf != (u_char*)buf) {
+        if (outbuf != (const u_char*)buf) {
                 block_free(outbuf, bytes_per_sample * samples);
         }
 

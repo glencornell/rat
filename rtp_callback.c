@@ -552,7 +552,7 @@ rtcp_app* rtcp_app_site_callback(struct rtp *session,
 	sp->rtcp_app_packet->length = 2 + datalen/4;
 	sp->rtcp_app_packet->ssrc = rtp_my_ssrc(session);
 
-	strncpy(sp->rtcp_app_packet->name, "site", 4);
+	memcpy(sp->rtcp_app_packet->name, "site", 4);
 	memset(sp->rtcp_app_packet->data, 0, datalen);
 	strncpy(sp->rtcp_app_packet->data, sp->rtp_session_app_site, slen);
 

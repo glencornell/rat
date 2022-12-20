@@ -11,6 +11,6 @@
 #ifndef _MBUS_ENGINE_H
 #define _MBUS_ENGINE_H
 
-void mbus_engine_rx(char *srce, char *cmnd, char *args, void *data);
+void mbus_engine_rx(const char *srce, const char *cmnd, char *args, void *data);
 
 #endif

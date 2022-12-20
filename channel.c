@@ -38,7 +38,7 @@ typedef struct {
         void    (*enc_destroy_state)  (u_char                **state,
                                        uint32_t                 len);
         int     (*enc_set_parameters) (u_char                 *state,
-                                       char                   *cmd);
+                                       const char             *cmd);
         int     (*enc_get_parameters) (u_char                 *state,
                                        char                   *cmd,
                                        uint32_t                 cmd_len);
@@ -284,7 +284,7 @@ channel_encoder_get_units_per_packet(channel_state_t *cs)
 }
 
 int
-channel_encoder_set_parameters(channel_state_t *cs, char *cmd)
+channel_encoder_set_parameters(channel_state_t *cs, const char *cmd)
 {
         if (table[cs->coder].enc_set_parameters) {
                 return table[cs->coder].enc_set_parameters(cs->state, cmd);

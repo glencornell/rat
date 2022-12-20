@@ -228,11 +228,8 @@ sinc_convert (const converter_fmt_t *cfmt,
               sample *dst_buf, int dst_len)
 {
         sinc_state_t *s;
-        int channels;
         sample *tmp_buf;
         int     tmp_len;
-
-        channels = cfmt->src_channels;
 
         s = (sinc_state_t*)state;
 
@@ -247,7 +244,6 @@ sinc_convert (const converter_fmt_t *cfmt,
                         converter_change_channels(src_buf, src_len, 2, dst_buf, dst_len, 1);
                         return;
                 }
-                channels = 1;
         } else if (cfmt->src_channels == 1 && cfmt->dst_channels == 2) {
                 dst_len /= 2;
         }

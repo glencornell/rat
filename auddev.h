@@ -37,7 +37,7 @@ int     audio_duplex        (audio_desc_t ad);
 int	audio_get_igain      (audio_desc_t ad);
 void	audio_set_ogain    (audio_desc_t ad, int vol);
 int	audio_get_ogain    (audio_desc_t ad);
-char *  audio_get_dev_name (audio_desc_t ad);
+const char *  audio_get_dev_name (audio_desc_t ad);
 
 void    audio_loopback      (audio_desc_t ad, int gain);
 int	audio_read          (audio_desc_t ad, sample *buf, int samples);

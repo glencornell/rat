@@ -407,7 +407,7 @@ redundancy_encoder_encode (u_char      *state,
  */
 
 int
-redundancy_encoder_set_parameters(u_char *state, char *cmd)
+redundancy_encoder_set_parameters(u_char *state, const char *_cmd)
 {
         u_char *encbuf;
         red_enc_state *n, *cur;
@@ -416,6 +416,7 @@ redundancy_encoder_set_parameters(u_char *state, char *cmd)
         codec_id_t  cid;
         char *s;
         int success = FALSE;
+        char *cmd = strdup(_cmd);
 
         assert(state != NULL);
         assert(cmd   != NULL);
@@ -486,6 +487,7 @@ redundancy_encoder_set_parameters(u_char *state, char *cmd)
 done:
         encbuf = (u_char*)n;
         redundancy_encoder_destroy(&encbuf, nl);
+        free(cmd);
         return success;
 }
 

@@ -18,6 +18,9 @@
 /* the files where they are actually used, there would be a couple of pints */
 /* in it.                                                                   */
 
+/* feature macro for strcasestr in string.h: */
+#define _GNU_SOURCE
+
 #include "ratconf.h"
 
 #include <stdlib.h>
@@ -54,8 +57,6 @@
 #include <math.h>
 #include <stdlib.h>
 
-/* feature macro for strcasestr in string.h: */
-#define _GNU_SOURCE
 #include <string.h>
 
 #ifdef HAVE_MALLOC_H

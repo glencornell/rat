@@ -45,7 +45,7 @@ pca_audio_device_count()
         return present;
 }
 
-char*
+const char*
 pca_audio_device_name(audio_desc_t ad)
 {
         UNUSED(ad);

@@ -45,7 +45,7 @@
 
 #define SECS_BETWEEN_1900_1970 2208988800u
 
-void rtpdump_header(FILE *logger, char *type, rtp_event *e)
+void rtpdump_header(FILE *logger, const char *type, const rtp_event *e)
 {
 	fprintf(logger, "%s %lu.%06lu 0x%08lx ",
 	        type,
@@ -54,7 +54,7 @@ void rtpdump_header(FILE *logger, char *type, rtp_event *e)
 	        (unsigned long) e->ssrc);
 }
 
-void rtpdump_callback(FILE *logger, rtp_event *e)
+void rtpdump_callback(FILE *logger, const rtp_event *e)
 {
 	rtp_packet	*p    = (rtp_packet *)     e->data;
 	rtcp_sr         *sr   = (rtcp_sr *)        e->data;

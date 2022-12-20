@@ -1832,7 +1832,7 @@ w32sdk_get_device_count(void)
 
 static char tmpname[MAXPNAMELEN];
 
-char *
+const char *
 w32sdk_get_device_name(int idx)
 {
         MIXERCAPS mc;

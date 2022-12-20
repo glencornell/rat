@@ -274,7 +274,7 @@ mbus_encode_cmd(ClientData ttp, Tcl_Interp *i, int argc, char *argv[])
 #include "xbm/balloon.xbm"
 #include "xbm/reception.xbm"
 
-static char*
+static const char*
 parse_assignment(char* cp)
 {
 	cp = strchr(cp, '=');
@@ -288,13 +288,13 @@ parse_assignment(char* cp)
 int
 tcl_init1(int argc, char **argv)
 {
-	char		*cmd_line_args, buffer[10];
+	char		*cmd_line_args, buffer[11];
 	Tcl_Obj 	*audiotool_obj;
 	int 		i;
 
 	Tcl_FindExecutable(argv[0]);
 	interp        = Tcl_CreateInterp();
-	cmd_line_args = Tcl_Merge(argc - 1, argv + 1);
+	cmd_line_args = Tcl_Merge(argc - 1, (const char * const*)(argv + 1));
 	Tcl_SetVar(interp, "argv", cmd_line_args, TCL_GLOBAL_ONLY);
 #ifndef WIN32
 	ckfree(cmd_line_args);

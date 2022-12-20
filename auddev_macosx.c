@@ -786,7 +786,7 @@ int macosx_audio_device_count(void)
     return 1;
 };
 
-char *macosx_audio_device_name(audio_desc_t idx)	/* Then this one tells us the name          */
+const char *macosx_audio_device_name(audio_desc_t idx)	/* Then this one tells us the name          */
 {
 	UNUSED(idx);
     char *name;

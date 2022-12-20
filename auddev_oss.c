@@ -1082,7 +1082,7 @@ oss_get_device_count()
 	return num_devices;
 }
 
-char *
+const char *
 oss_get_device_name(audio_desc_t ad)
 {
         assert((ad >= 0) && (ad < num_devices));

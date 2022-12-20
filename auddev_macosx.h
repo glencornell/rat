@@ -36,7 +36,7 @@ void macosx_audio_wait_for			(audio_desc_t ad, int delay_ms);
 int  macosx_audio_supports			(audio_desc_t ad, audio_format *fmt);
 int	 macosx_audio_init			(void);
 int	 macosx_audio_device_count		(void);
-char *macosx_audio_device_name			(audio_desc_t idx);
+const char *macosx_audio_device_name			(audio_desc_t idx);
 
 #endif /* _AUDDEV_MACOSX_H_ */
 

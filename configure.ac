@@ -43,7 +43,34 @@ AC_TYPE_UINT8_T
 AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([atexit bzero gethostbyname gethostname gettimeofday inet_ntoa isascii memmove memset pow putenv select snprintf sqrt strcasecmp strchr strdup strerror strncasecmp strrchr strstr strtoul uname usleep])
+AC_CHECK_FUNCS([
+atexit
+bzero
+gethostbyname
+gethostname
+gettimeofday
+inet_ntoa
+isascii
+memmove
+memset
+nanosleep
+pow
+putenv
+select
+snprintf
+sqrt
+strcasecmp
+strcasestr
+strchr
+strdup
+strerror
+strncasecmp
+strrchr
+strstr
+strtoul
+uname
+usleep
+])
 
 # This is kind-of ugly, but necessary to get the OSTYPE to match those used
 # in earlier versions of rat (and, despite what rms thinks, I don't like my

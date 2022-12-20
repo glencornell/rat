@@ -37,6 +37,6 @@
  *
  */
 
-void rtpdump_header(FILE *logger, char *type, rtp_event *e);
-void rtpdump_callback(FILE *logger, rtp_event *e);
+void rtpdump_header(FILE *logger, const char *type, const rtp_event *e);
+void rtpdump_callback(FILE *logger, const rtp_event *e);
 

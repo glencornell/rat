@@ -19,7 +19,7 @@ int  layered_encoder_create  (u_char **state,
 void layered_encoder_destroy (u_char **state,
                               uint32_t  len);
 int  layered_encoder_set_parameters(u_char *state,
-                                    char *cmd);
+                                    const char *cmd);
 int  layered_encoder_get_parameters(u_char *state,
                                     char *cmd,
                                     uint32_t cmd_len);

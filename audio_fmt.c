@@ -385,6 +385,7 @@ convert_buffer_sample_type(audio_format *src, u_char *src_buf, int src_bytes,
                                 *dst8 = s2u(tmp16);
                                 src8++; dst8++;
                         }
+                        break;
                 case DEV_PCMA:
                         dst8 = dst_buf;
                         while(src8 < se) {
@@ -392,6 +393,7 @@ convert_buffer_sample_type(audio_format *src, u_char *src_buf, int src_bytes,
                                 *dst8 = s2a(tmp16);
                                 src8++; dst8++;
                         }
+                        break;
                 case DEV_U8:
                         break; /* Nothing to do! */
                 }

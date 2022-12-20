@@ -39,7 +39,7 @@ typedef struct {
         int  (*audio_if_init)(void);                 /* Test and initialize audio interface (OPTIONAL)    */
         int  (*audio_if_free)(void);                 /* Free audio interface (OPTIONAL)                   */
         int  (*audio_if_dev_cnt)(void);              /* Device count for interface (REQUIRED)             */
-        char*
+        const char*
              (*audio_if_dev_name)(int);              /* Device name query (REQUIRED)                      */
 
         int  (*audio_if_open)(int, audio_format *ifmt, audio_format *ofmt); /* Open device with formats   */
@@ -1156,7 +1156,7 @@ audio_get_iport_count(audio_desc_t ad)
         return audio_if_table[iface].audio_if_get_iport_count(device);
 }
 
-char *
+const char *
 audio_get_dev_name(audio_desc_t ad)
 {
         int iface, device;

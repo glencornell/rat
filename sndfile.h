@@ -34,7 +34,7 @@ extern "C" {
 struct s_sndfile;
 
 int  snd_read_open (struct s_sndfile **sf,
-                    char              *path,
+                    const char        *path,
                     sndfile_fmt_t     *fmt);  /* fmt only used for conversion to l16 if file type is raw, maybe NULL */
 
 int  snd_read_close (struct s_sndfile **sf);
@@ -44,14 +44,14 @@ int  snd_read_audio (struct s_sndfile **sf,
                      uint16_t buf_len);     /* sampling_intervals * channels */
 
 int  snd_write_open (struct s_sndfile **sf,
-                     char         *path,
-                     char         *default_extension, /* "au", or "wav", fallback if not specified */
+                     const char   *path,
+                     const char   *default_extension, /* "au", or "wav", fallback if not specified */
                      const sndfile_fmt_t *fmt);
 
 int  snd_write_close (struct s_sndfile **sf);
 
 int  snd_write_audio (struct s_sndfile **sf,
-                      sample *buf,
+                      const sample *buf,
                       uint16_t buf_len);
 
 int  snd_pause (struct s_sndfile *sf);

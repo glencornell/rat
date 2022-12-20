@@ -152,7 +152,7 @@ vdvi_encoder(uint16_t idx, u_char *encoder_state, sample *inbuf, coded_unit *c)
 int
 vdvi_decoder(uint16_t idx, u_char *decoder_state, coded_unit *c, sample *data)
 {
-        int samples, len;
+        int samples;
         u_char dvi_buf[80];
         vdvi_state_t *v;
 
@@ -170,7 +170,7 @@ vdvi_decoder(uint16_t idx, u_char *decoder_state, coded_unit *c, sample *data)
 	}
 
         bs_attach(v->bs, c->data, c->data_len);
-        len = vdvi_decode(v->bs, dvi_buf, 160);
+        vdvi_decode(v->bs, dvi_buf, 160);
 
         samples = cs[idx].format.bytes_per_block / sizeof(sample);
 	adpcm_decoder(dvi_buf, data, samples, v->as);

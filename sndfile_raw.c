@@ -128,7 +128,7 @@ raw_write_hdr(FILE *fp, char **state, const sndfile_fmt_t *fmt)
 }
 
 int
-raw_write_audio(FILE *fp, char *state, sample *buf, int samples)
+raw_write_audio(FILE *fp, char *state, const sample *buf, int samples)
 {
         int i, bytes_per_sample = 1;
         raw_state_t *rs;
@@ -150,7 +150,7 @@ raw_write_audio(FILE *fp, char *state, sample *buf, int samples)
                         }
                         outbuf = (u_char*)l16buf;
                 } else {
-                        outbuf = (u_char*)buf;
+                        outbuf = (const u_char*)buf;
                 }
                 break;
         case SNDFILE_ENCODING_L8:
@@ -179,7 +179,7 @@ raw_write_audio(FILE *fp, char *state, sample *buf, int samples)
         fwrite(outbuf, bytes_per_sample, samples, fp);
 
         /* outbuf only equals buf if no sample type conversion was done */
-        if (outbuf != (u_char*)buf) {
+        if (outbuf != (const u_char*)buf) {
                 block_free(outbuf, bytes_per_sample * samples);
         }
 

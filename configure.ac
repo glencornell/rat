@@ -3,7 +3,7 @@ dnl $Header: /cs/research/mice/starship/src/local/CVS_repository/rat/configure.i
 dnl
 dnl Process this file with GNU autoconf to generate a configure script.
 
-AC_PREREQ([2.71])
+AC_PREREQ([2.69])
 AC_INIT([rat],[4.4.01],[])
 AC_CONFIG_SRCDIR([converter.c])
 AC_CONFIG_HEADERS([ratconf.h:config.h.in])
@@ -105,7 +105,7 @@ then
 fi
 
 #-----------------------------------------------------------------------------
-# Check for various headers                                                 
+# Check for various headers
 #-----------------------------------------------------------------------------
 AC_CHECK_HEADERS(stdint.h inttypes.h sys/filio.h malloc.h bstring.h)
 AC_CHECK_HEADERS(sys/sockio.h)
@@ -121,7 +121,7 @@ AC_EGREP_CPP(kill, [#include <signal.h>],
 ])
 
 #-----------------------------------------------------------------------------
-# Check for libraries                                                       
+# Check for libraries
 #-----------------------------------------------------------------------------
 AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(inet_addr, nsl)
@@ -152,7 +152,7 @@ fi
 #  __CHAR_UNSIGNED__ will be defined; hope this is OK.
 
 #-----------------------------------------------------------------------------
-# Audio device selection, derived from host type.  Could be smart and probe 
+# Audio device selection, derived from host type.  Could be smart and probe
 # what's there, but can't guarantee that build host has audio device(s).  RAT
 # probes devices at startup from those compiled in so this is not an issue
 # when re-distributing.
@@ -167,7 +167,7 @@ case "$target" in
 	O1KHOME="/opt/SUNWo1kp"
 	AC_ARG_WITH(sun-audio,    [  --with-sun-audio=DIR    specify Sun audio support home], SUNAUDIOHOME=$withval)
 	AUD_INC="$AUD_INC -I$SUNAUDIOHOME/include"
-	AUD_OBJ="$AUD_OBJ auddev_sparc.o" 
+	AUD_OBJ="$AUD_OBJ auddev_sparc.o"
 	AC_DEFINE([HAVE_SPARC_AUDIO],[],[HAVE_SPARC_AUDIO])
 	AC_ARG_WITH(osprey-audio, [  --with-osprey=DIR       specify Osprey (Sunvideo Plus PCI) support home], O1KHOME=$withval)
 	AC_CHECK_HEADER($O1KHOME/include/oti_audio_device.h,
@@ -179,7 +179,7 @@ case "$target" in
 	# Do we have telephony drivers?
 	AC_CHECK_HEADER(linux/telephony.h,[
 		AC_MSG_CHECKING([for recent telephony drivers])
-		AC_EGREP_HEADER(PHONE_CID, linux/telephony.h,[ 
+		AC_EGREP_HEADER(PHONE_CID, linux/telephony.h,[
 			AC_MSG_RESULT(present)
 			AUD_SRC="$AUD_SRC auddev_ixj.c"
 			AC_DEFINE([HAVE_IXJ_AUDIO],[],[have telephony drivers])
@@ -197,8 +197,8 @@ case "$target" in
 	# mixer behaves differently under both systems.  During runtime
 	# only one of these modules will be used.
 	AUD_OBJ="$AUD_OBJ auddev_luigi.o auddev_newpcm.o"
-	AC_DEFINE([HAVE_LUIGI_AUDIO],[],[HAVE_LUIGI_AUDIO]) 
-  	AC_DEFINE([HAVE_NEWPCM_AUDIO],[],[HAVE_NEWPCM_AUDIO]) 
+	AC_DEFINE([HAVE_LUIGI_AUDIO],[],[HAVE_LUIGI_AUDIO])
+  	AC_DEFINE([HAVE_NEWPCM_AUDIO],[],[HAVE_NEWPCM_AUDIO])
 	;;
 *netbsd*)
 	AC_CHECK_LIB(ossaudio, main)
@@ -316,7 +316,7 @@ AC_SUBST(G728_LIB)
 AC_SUBST(G728_CODEC_OBJ)
 
 #-----------------------------------------------------------------------------
-# Assorted Enable options 
+# Assorted Enable options
 #-----------------------------------------------------------------------------
 AC_ARG_ENABLE(optimize,
         [  --enable-optimize       enable optimization],

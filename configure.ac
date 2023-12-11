@@ -43,34 +43,32 @@ AC_TYPE_UINT8_T
 AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([
-atexit
-bzero
-gethostbyname
-gethostname
-gettimeofday
-inet_ntoa
-isascii
-memmove
-memset
-nanosleep
-pow
-putenv
-select
-snprintf
-sqrt
-strcasecmp
-strcasestr
-strchr
-strdup
-strerror
-strncasecmp
-strrchr
-strstr
-strtoul
-uname
-usleep
-])
+AC_CHECK_FUNC([atexit])
+AC_CHECK_FUNC([bzero])
+AC_CHECK_FUNC([gethostbyname])
+AC_CHECK_FUNC([gethostname])
+AC_CHECK_FUNC([gettimeofday])
+AC_CHECK_FUNC([inet_ntoa])
+AC_CHECK_FUNC([isascii])
+AC_CHECK_FUNC([memmove])
+AC_CHECK_FUNC([memset])
+AC_CHECK_FUNC([nanosleep])
+AC_CHECK_FUNC([pow])
+AC_CHECK_FUNC([putenv])
+AC_CHECK_FUNC([select])
+AC_CHECK_FUNC([snprintf])
+AC_CHECK_FUNC([sqrt])
+AC_CHECK_FUNC([strcasecmp])
+AC_CHECK_FUNC([strcasestr])
+AC_CHECK_FUNC([strchr])
+AC_CHECK_FUNC([strdup])
+AC_CHECK_FUNC([strerror])
+AC_CHECK_FUNC([strncasecmp])
+AC_CHECK_FUNC([strrchr])
+AC_CHECK_FUNC([strstr])
+AC_CHECK_FUNC([strtoul])
+AC_CHECK_FUNC([uname])
+AC_CHECK_FUNC([usleep])
 
 # This is kind-of ugly, but necessary to get the OSTYPE to match those used
 # in earlier versions of rat (and, despite what rms thinks, I don't like my
@@ -263,8 +261,12 @@ AC_ARG_ENABLE(kame-ipv6,
 # Check for UCL Multimedia Base (formerly common) library
 #-----------------------------------------------------------------------------
 PKG_CHECK_MODULES([UCLMMBASE], [libuclmmbase])
-PKG_CHECK_MODULES([TK], [tk8.6])
-PKG_CHECK_MODULES([TCL], [tcl8.6])
+PKG_CHECK_MODULES([TK], [tk8.6], , [
+    PKG_CHECK_MODULES([TK], [tk >= 8.6])
+])
+PKG_CHECK_MODULES([TCL], [tcl8.6], , [
+    PKG_CHECK_MODULES([TCL], [tcl >= 8.6])
+])
 PKG_CHECK_MODULES([ALSA], [alsa], [
     use_alsa=yes
     AC_DEFINE([HAVE_ALSA],[1],[Define if ALSA sound drivers are available])])

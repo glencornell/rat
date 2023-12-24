@@ -17,6 +17,8 @@
 #include "converter_types.h"
 #include "converter.h"
 
+int num_sessions = 0;
+
 static int
 list_converters()
 {

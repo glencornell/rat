@@ -21,6 +21,8 @@
  * - modulate transmission with pseudo-voice modulation (-b).
  */
 
+int num_sessions = 0;
+
 /* ------------------------------------------------------------------------- */
 /* Outgoing packet buffering for jitter */
 

@@ -6,6 +6,8 @@
 #include "util.h" /* Block alloc */
 #include "debug.h"
 
+int num_sessions = 0;
+
 static void
 buffer_fill(sample *s, int s_bytes, int channels, int freq)
 {

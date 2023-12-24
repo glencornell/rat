@@ -8,6 +8,8 @@
 #include "debug.h"
 #include "memory.h"
 
+int num_sessions = 0;
+
 int rates[] = {8000,16000,32000,48000};
 
 #define SAMPLES 320
@@ -73,6 +75,3 @@ int main()
 
         return 1;
 }
-
-
-

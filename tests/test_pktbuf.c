@@ -7,6 +7,7 @@
 #define PKTBUF_SIZE 23
 
 static int 		buf_est;
+int num_sessions = 0;
 
 static void
 add_thing(pktbuf_t *pb, rtp_packet *pp) {

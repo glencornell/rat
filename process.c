@@ -150,5 +150,3 @@ void kill_process(pid_t proc)
         kill(proc, SIGINT);
 #endif
 }
-
-

@@ -9,6 +9,8 @@ uint32_t f[] = {8000, 11025, 16000, 22050, 24000, 32000, 40000, 44100, 48000, 90
 
 #define NUM_F (sizeof(f)/sizeof(uint32_t))
 
+int num_sessions = 0;
+
 static int
 test1()
 {

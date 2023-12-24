@@ -13,6 +13,8 @@
 
 typedef void (*freeproc)(u_char **, uint32_t);
 
+int num_sessions = 0;
+
 static void
 do_test(codec_state *src_coder,
         struct s_channel_state *src_channel,

@@ -45,6 +45,7 @@ pid_t       pid_ui, pid_engine;
 int         should_exit;
 int	    ui_enabled = TRUE;
 int	    continuing_from_stop=0;
+int		 num_sessions = 0;
 
 static int ttl = 127;
 
@@ -81,7 +82,7 @@ address_is_valid(const char *candidate)
         return okay;
 }
 
-static int parse_options_early(int argc, const char **argv)
+static int parse_options_early(int argc, char **argv)
 {
         int i;
 
@@ -435,7 +436,7 @@ int main(int argc, char *argv[])
         char		 c_addr[60], *token_u[2], *token_e[2];
         int		 seed = (gethostid() << 8) | (getpid() & 0xff), final_iters;
         struct timeval	 timeout;
-	int		 i, num_sessions = 0;
+	int		 i;
 		char **xargv = xmalloc(argc);
 		int  xargc=0;
 
@@ -460,7 +461,7 @@ int main(int argc, char *argv[])
 		num_sessions = 1;
 	}
 
-    if (parse_options_early(argc, (const char**)argv) == FALSE) {
+    if (parse_options_early(argc, argv) == FALSE) {
             return FALSE;
     }
 
@@ -472,7 +473,7 @@ int main(int argc, char *argv[])
             fatal_error("RAT v" RAT_VERSION, "Could not initialize Mbus: Is multicast enabled?");
             return FALSE;
     }
-        
+
     /* pull out -X arguments */
     for(i=0; i<argc; i++) {
     	if( strcmp(argv[i],"-X") == 0 ) {
@@ -480,7 +481,7 @@ int main(int argc, char *argv[])
     		xargv[xargc] = argv[i]; xargc++;
     	}
     }
-        
+
 
 	if (ui_enabled) {
 		token_u[0] = generate_token();
@@ -505,7 +506,7 @@ int main(int argc, char *argv[])
         }
 		debug_msg("Controller rendezvous'd with media engine (%s)\n",e_addr[i]);
 	}
-		
+
     if (parse_addresses(m, e_addr, argc, argv) == TRUE) {
 		char	*peer;
 
@@ -567,4 +568,3 @@ int main(int argc, char *argv[])
         debug_msg("Controller exit\n");
         return 0;
 }
-

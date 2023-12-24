@@ -12,6 +12,8 @@
 #include "assert.h"
 #include "debug.h"
 
+int num_sessions = 0;
+
 int
 main()
 {

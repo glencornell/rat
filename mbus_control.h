@@ -14,6 +14,5 @@
 
 void  mbus_control_wait_init(char *token);
 char *mbus_control_wait_done(void);
-void  mbus_control_rx(char *srce, char *cmnd, char *args, void *data);
-
+void  mbus_control_rx(const char *srce, const char *cmnd, char *args, void *data);
 #endif

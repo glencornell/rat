@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int num_sessions = 0;
+
 /*
  * test_repair: this test takes an audio file, codes it, and simulates
  * loss on the coded audio, and writes a file of what would be decoded

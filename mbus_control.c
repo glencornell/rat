@@ -125,7 +125,7 @@ static const mbus_cmd_tuple control_cmds[] = {
 
 #define NUM_CONTROL_CMDS sizeof(control_cmds)/sizeof(control_cmds[0])
 
-void mbus_control_rx(char *srce, char *cmnd, char *args, void *data)
+void mbus_control_rx(const char *srce, const char *cmnd, char *args, void *data)
 {
 	uint32_t i;
 
@@ -137,4 +137,3 @@ void mbus_control_rx(char *srce, char *cmnd, char *args, void *data)
 	}
 	debug_msg("Unknown mbus command: %s (%s)\n", cmnd, args);
 }
-

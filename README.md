@@ -15,6 +15,65 @@ is available from <http://www-mice.cs.ucl.ac.uk/multimedia/software/rat/>
 
 See the file [INSTALL.TXT](INSTALL.md) for installation and compilation instructions.
 
+### Dependencies
+
+This project depends upon alsa-lib (Linux), tcl, and tk.  For Fedora
+based systems, install the following packages:
+
+```bash
+sudo dnf install alsa-lib alsa-lib-devel tcl tcl-devel tk tk-devel
+```
+
+This project also requires `librat`, also known as the UCL Common Code
+Library.  You can get it
+[here](https://github.com/glencornell/rat-common).  Before proceding,
+make sure that `librat` is installed on your system.
+
+### Building and installing a package
+
+```bash
+autoreconf -vi
+./configure
+make rpm
+sudo dnf install rpmbuild/RPMS/x86_64/rat-[0-9]*.$(uname -m).rpm
+```
+
+## Running
+
+### Firewall
+
+You will need to open a few ports in your firewall:
+
+```bash
+# Add the ports for your secific network audio conference. Any ports
+# will work, but the port number for RTCP is just after that of RTP.
+# For example, 5004 (RTP) and 5005 (RTCP).
+sudo firewall-cmd --zone=public --add-port=5004/udp --permanent
+sudo firewall-cmd --zone=public --add-port=5005/udp --permanent
+
+# Add the port for the local mbus traffic:
+sudo firewall-cmd --zone=public --add-port=47000/udp --permanent
+
+# Reload the firewall and make sure the ports are open:
+sudo firewall-cmd --reload
+sudo firewall-cmd --zone=public --list-ports
+```
+
+### Running rat
+
+```bash
+rat 224.1.2.3/5004
+```
+
+### Configuring
+
+There are a few configuration files stored in your home directory that
+you can modify:
+
+ - `~/.mbus`: MBUS configuration parameters
+ - `~/.RATdefaults`: Settings for RAT (default codec, sample rate, etc)
+ - `~/.RTPdefaults`: Your information published to other conference members
+
 ## Community
 
 Send comments, suggestions and bug-reports to <rat-trap@cs.ucl.ac.uk>. A

@@ -234,7 +234,8 @@ main(int argc, char* argv[])
 	codec_state *cs;
 	coded_unit  *in;
 	coded_unit  *out;
-	uint32_t      ts, timeout, my_ssrc, set_ssrc = 0;
+	uint32_t      ts = 0;
+	uint32_t timeout, my_ssrc, set_ssrc = 0;
 	char *u, *addr = NULL, *port = NULL, pt;
 	struct rtp *session;
 	ac = 1;

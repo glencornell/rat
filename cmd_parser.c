@@ -42,7 +42,7 @@ usage(const char *szOffending)
 #else
 	printf("Usage: rat [options] -t <ttl> <addr>/<port>\n");
 	if (szOffending) {
-		printf(szOffending);
+		printf("%s", szOffending);
 	}
 #endif
 }
@@ -68,7 +68,7 @@ cmd_logdebug(struct mbus *m, char *addr, int argc, char *argv[])
         return TRUE;
 }
 
-static int 
+static int
 cmd_layers(struct mbus *m, char *addr, int argc, char *argv[])
 {
         int layers;
@@ -302,7 +302,7 @@ cmd_app_site(struct mbus *m, char *addr, int argc, char *argv[]) {
         xfree(app_value);
         return TRUE;
 }
-  
+
 static args_handler late_args[] = {
 	{ "-logstats",       cmd_logstats,     0 },
 	{ "-logdebug",       cmd_logdebug,     1 },
@@ -342,5 +342,3 @@ cmd_args_handler(const char *cmdname)
         }
         return NULL;
 }
-
-

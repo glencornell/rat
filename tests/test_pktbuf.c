@@ -33,7 +33,7 @@ remove_thing(pktbuf_t *pb) {
 int main() {
 	static rtp_packet	*pp;
 	static pktbuf_t		*pb;
-	int32_t			i, j, n,ts;
+	int32_t			i, j, n,ts = 0;
 
 	if (pktbuf_create(&pb, PKTBUF_SIZE) == 0) {
 		printf("Failed to create buffer\n");

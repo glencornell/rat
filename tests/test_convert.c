@@ -44,10 +44,10 @@ usage()
         exit(-1);
 }
 
-static char*
-get_token(char *name, char *src, int src_len)
+static char const *
+get_token(char const *name, char const *src, int src_len)
 {
-        char *cur;
+        char const *cur;
         int cur_len, done;
 
         done = 0;
@@ -177,7 +177,7 @@ int
 main(int argc, char *argv[])
 {
         int i;
-        int idx;
+        int idx = 0;
         converter_fmt_t cf;
         converters_init();
 

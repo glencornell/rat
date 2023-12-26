@@ -1,0 +1,86 @@
+%define name @PACKAGE_NAME@
+%define version @PACKAGE_VERSION@
+%define release ipv6
+
+Name: %{name}
+Summary: UCL Robust Audio Tool
+Version: %{version}
+Release: %{release}
+Group: Applications/Internet
+License: BSD-Style
+URL: http://www-mice.cs.ucl.ac.uk/multimedia/software/%{name}/
+Source: %{name}-%{version}.tar.gz
+
+BuildRequires:  gcc
+BuildRequires:  make
+BuildRequires:  automake
+BuildRequires:  autoconf
+BuildRequires:  libtool
+BuildRequires:  tcl-devel
+BuildRequires:  tk-devel
+BuildRequires:  librat-devel
+BuildRequires:  alsa-lib-devel
+
+Requires: tcl >= 8.6
+Requires: tk >= 8.6
+Requires: librat
+Requires: alsa-lib
+
+%description
+RAT is the premier open source voice-over-IP
+application. It allows users to particpate in audio
+conferences over the internet. These can be between
+two participants directly, or between a group of
+participants on a common multicast group. No special
+features are required to use RAT in point-to-point
+mode, but to use the multiparty conferencing facilities
+of RAT, all participants must reside on a portion of the
+Internet which supports IP multicast. RAT is based on
+IETF standards, using RTP above UDP/IP as its
+transport protocol, and conforming to the RTP profile
+for audio and video conference with minimal control.
+
+RAT features sender based loss mitigation mechanisms
+and receiver based audio repair techniques to compensate
+for packet loss, and load adaption in response to host
+performance. It runs on a range of platforms: FreeBSD,
+HP-UX, IRIX, Linux, NetBSD, Solaris, SunOS, and Windows
+95/NT. The source code is publicly available for porting
+to other platforms and for modification by others.
+
+See http://www-mice.cs.ucl.ac.uk/multimedia/software/rat
+
+%prep
+%setup -q
+
+%build
+%configure --prefix=%{_prefix} --enable-ipv6
+make %{?_smp_mflags}
+
+%install
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot}
+rm -f %{buildroot}%{_libdir}/lib*.la
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%files
+%defattr(-,root,root)
+%doc README.md README.devices README.files
+%doc README.gsm README.mbus README.playout
+%doc README.timestamps COPYRIGHT
+%{_bindir}/*
+%{_libdir}/lib*.so*
+%{_libdir}/lib*.a
+%{_mandir}/*/*
+
+%changelog
+* Mon Mar 24 2003 Kristian Hasler <k.hasler@cs.ucl.ac.uk>
+- ipv6 build is default
+- RAT SDR plugin is installed in /usr/local/etc/sdr/plugins
+- now uses makefile to install files
+
+* Tue Jan 04 2000 Colin Perkins <c.perkins@cs.ucl.ac.uk>
+- initial build

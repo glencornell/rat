@@ -363,5 +363,7 @@ AC_ARG_ENABLE(debug-mem,
         fi])
 
 AC_CONFIG_FILES([Makefile
-        tests/Makefile])
+        man/man1/Makefile
+        tests/Makefile
+        rat.spec])
 AC_OUTPUT

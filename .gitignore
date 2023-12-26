@@ -27,10 +27,13 @@ ltmain.sh
 m4/
 missing
 rat
+rat-*.tar.gz
 rat-kill
 rat-media
 rat-ui
+rat.spec
 ratconf.h
+rpmbuild
 stamp-h1
 test-driver
 tests/*.log

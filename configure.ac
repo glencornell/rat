@@ -362,6 +362,10 @@ AC_ARG_ENABLE(debug-mem,
                 AC_DEFINE([DEBUG_MEM],[],[DEBUG_MEM])
         fi])
 
+# Check for debian packaging
+AC_CHECK_PROG([DPKG_EXISTS], [dpkg], [yes], [no])
+AM_CONDITIONAL([HAVE_DPKG], [test "$DPKG_EXISTS" = "yes"])
+
 AC_CONFIG_FILES([Makefile
         man/man1/Makefile
         tests/Makefile

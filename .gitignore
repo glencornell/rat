@@ -1,6 +1,11 @@
+*.buildinfo
+*.changes
+*.deb
+*.dsc
 *.la
 *.lo
 *.o
+*.tar.gz
 *~
 ./Makefile
 .deps/
@@ -27,7 +32,6 @@ ltmain.sh
 m4/
 missing
 rat
-rat-*.tar.gz
 rat-kill
 rat-media
 rat-ui

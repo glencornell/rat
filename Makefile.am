@@ -199,8 +199,8 @@ rpmroot:
 	mkdir -p $(RPMBUILD)/SPECS
 	mkdir -p $(RPMBUILD)/SRPMS
 
-.PHONY: rpm
-rpm: dist-gzip rpmroot
+.PHONY: dist-rpm
+dist-rpm: dist-gzip rpmroot
 	@cp $(distdir).tar.gz $(RPMBUILD)/SOURCES/
 	@cp $(specfile) $(RPMBUILD)/SPECS/
 	cd $(RPMBUILD) ; \
